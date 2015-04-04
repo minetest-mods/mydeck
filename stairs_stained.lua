@@ -397,6 +397,78 @@ minetest.register_node("mydeck:stairs_raills", {
 
 
 
+minetest.register_node("mydeck:stairs_railr_ends", {
+	description = "Stairs",
+	tiles = {
+		"mydeck_hwoods.png",
+		"mydeck_hwoods.png",
+		"mydeck_hwoods.png",
+		"mydeck_hwoods.png",
+		"mydeck_hwoods.png",
+		"mydeck_hwoods.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drop = "mydeck:stairs_railr",
+	sunlight_propagates = true,
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{0.3125, -0.5, 0.4375, 0.5, 0.375, 0.5}, 
+			{0.3125, 0.375, 0.4375, 0.5, 0.5, 0.5}, 
+			{0.3125, 0.3125, 0.375, 0.5, 0.4375, 0.4375}, 
+			{0.3125, 0.25, 0.3125, 0.5, 0.375, 0.375}, 
+			{0.3125, 0.1875, 0.25, 0.5, 0.3125, 0.3125}, 
+			{0.3125, 0.125, 0.1875, 0.5, 0.25, 0.25}, 
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{0.3125, -0.5,   0.1875,    0.5,   0.5, 0.5 }, 
+			}
+		},
+})
+minetest.register_node("mydeck:stairs_raill_ends", {
+	description = "Stairs",
+	tiles = {
+		"mydeck_hwoods.png",
+		"mydeck_hwoods.png",
+		"mydeck_hwoods.png",
+		"mydeck_hwoods.png",
+		"mydeck_hwoods.png",
+		"mydeck_hwoods.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drop = "mydeck:stairs_raill",
+	sunlight_propagates = true,
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5, 0.4375, -0.5, 0.375, 0.5},
+			{-0.3125, 0.375, 0.4375, -0.5, 0.5, 0.5}, 
+			{-0.3125, 0.3125, 0.375, -0.5, 0.4375, 0.4375}, 
+			{-0.3125, 0.25, 0.3125, -0.5, 0.375, 0.375}, 
+			{-0.3125, 0.1875, 0.25, -0.5, 0.3125, 0.3125}, 
+			{-0.3125, 0.125, 0.1875, -0.5, 0.25, 0.25}, 
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5,   0.1875,    -0.5,   0.5, 0.5 }, 
+			}
+		},
+})
 
 
 

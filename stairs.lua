@@ -56,15 +56,7 @@ minetest.register_node("mydeck:stairs", {
 			{-0.5, -0.5, 0.125, 0.5, 0.5, 0.5}, 
 			}
 		},
---	after_place_node = function(pos, placer, itemstack, pointed_thing)
-	
---		local nodedown = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
 
-
---		if nodedown == "air" then
---		   minetest.set_node(pos,{name = "mydeck:stairsb", param2=minetest.dir_to_facedir(placer:get_look_dir())})
---		end
---	end
 })
 
 minetest.register_abm({
@@ -314,24 +306,24 @@ minetest.register_node("mydeck:stairs_railr", {
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{0.3125, -0.5, 0.4375, 0.5, 0.375, 0.5}, -- NodeBox1
-			{0.3125, -1.5, -0.4375, 0.5, -0.5, -0.5}, -- NodeBox1
-			{0.3125, 0.375, 0.4375, 0.5, 0.5, 0.5}, -- NodeBox2
-			{0.3125, 0.3125, 0.375, 0.5, 0.4375, 0.4375}, -- NodeBox3
-			{0.3125, 0.25, 0.3125, 0.5, 0.375, 0.375}, -- NodeBox4
-			{0.3125, 0.1875, 0.25, 0.5, 0.3125, 0.3125}, -- NodeBox5
-			{0.3125, 0.125, 0.1875, 0.5, 0.25, 0.25}, -- NodeBox6
-			{0.3125, 0.0625, 0.125, 0.5, 0.1875, 0.1875}, -- NodeBox7
-			{0.3125, 0, 0.0625, 0.5, 0.125, 0.125}, -- NodeBox8
-			{0.3125, -0.0625, 0, 0.5, 0.0625, 0.0625}, -- NodeBox9
-			{0.3125, -0.125, -0.0625, 0.5, 0, 0}, -- NodeBox10
-			{0.3125, -0.1875, -0.125, 0.5, -0.0625, -0.0625}, -- NodeBox11
-			{0.3125, -0.25, -0.1875, 0.5, -0.125, -0.125}, -- NodeBox12
-			{0.3125, -0.3125, -0.25, 0.5, -0.1875, -0.1875}, -- NodeBox13
-			{0.3125, -0.375, -0.3125, 0.5, -0.25, -0.25}, -- NodeBox14
-			{0.3125, -0.4375, -0.375, 0.5, -0.3125, -0.3125}, -- NodeBox15
-			{0.3125, -0.5, -0.4375, 0.5, -0.375, -0.375}, -- NodeBox16
-			{0.3125, -0.5, -0.5, 0.5, -0.4375, -0.4375}, -- NodeBox17
+			{0.3125, -0.5, 0.4375, 0.5, 0.375, 0.5}, 
+			{0.3125, -1.5, -0.4375, 0.5, -0.5, -0.5}, 
+			{0.3125, 0.375, 0.4375, 0.5, 0.5, 0.5}, 
+			{0.3125, 0.3125, 0.375, 0.5, 0.4375, 0.4375}, 
+			{0.3125, 0.25, 0.3125, 0.5, 0.375, 0.375}, 
+			{0.3125, 0.1875, 0.25, 0.5, 0.3125, 0.3125}, 
+			{0.3125, 0.125, 0.1875, 0.5, 0.25, 0.25}, 
+			{0.3125, 0.0625, 0.125, 0.5, 0.1875, 0.1875}, 
+			{0.3125, 0, 0.0625, 0.5, 0.125, 0.125}, 
+			{0.3125, -0.0625, 0, 0.5, 0.0625, 0.0625},
+			{0.3125, -0.125, -0.0625, 0.5, 0, 0}, 
+			{0.3125, -0.1875, -0.125, 0.5, -0.0625, -0.0625}, 
+			{0.3125, -0.25, -0.1875, 0.5, -0.125, -0.125}, 
+			{0.3125, -0.3125, -0.25, 0.5, -0.1875, -0.1875}, 
+			{0.3125, -0.375, -0.3125, 0.5, -0.25, -0.25}, 
+			{0.3125, -0.4375, -0.375, 0.5, -0.3125, -0.3125}, 
+			{0.3125, -0.5, -0.4375, 0.5, -0.375, -0.375}, 
+			{0.3125, -0.5, -0.5, 0.5, -0.4375, -0.4375}, 
 
 
 		}
@@ -342,7 +334,25 @@ minetest.register_node("mydeck:stairs_railr", {
 			{0.3125, -0.5,   -0.5,    0.5,   0.5, 0.5 }, 
 			}
 		},
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		
+		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+
+		if nodeu == "mydeck:stairs" or
+		   nodeu == "mydeck:stairsb" or
+		   nodeu == "mydeck:stairss" or
+		   nodeu == "mydeck:stairsbs" then
+		   minetest.set_node(pos,{name = "mydeck:stairs_railr", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		else
+		
+		   minetest.set_node(pos,{name = "mydeck:stairs_railr_end", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		
+		end
+	end,
 })
+
+
 minetest.register_node("mydeck:stairs_raill", {
 	description = "Stairs",
 	tiles = {
@@ -361,24 +371,24 @@ minetest.register_node("mydeck:stairs_raill", {
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.3125, -0.5, 0.4375, -0.5, 0.375, 0.5}, -- NodeBox1
-			{-0.3125, -1.5, -0.4375, -0.5, -0.5, -0.5}, -- NodeBox1
-			{-0.3125, 0.375, 0.4375, -0.5, 0.5, 0.5}, -- NodeBox2
-			{-0.3125, 0.3125, 0.375, -0.5, 0.4375, 0.4375}, -- NodeBox3
-			{-0.3125, 0.25, 0.3125, -0.5, 0.375, 0.375}, -- NodeBox4
-			{-0.3125, 0.1875, 0.25, -0.5, 0.3125, 0.3125}, -- NodeBox5
-			{-0.3125, 0.125, 0.1875, -0.5, 0.25, 0.25}, -- NodeBox6
-			{-0.3125, 0.0625, 0.125, -0.5, 0.1875, 0.1875}, -- NodeBox7
-			{-0.3125, 0, 0.0625, -0.5, 0.125, 0.125}, -- NodeBox8
-			{-0.3125, -0.0625, 0, -0.5, 0.0625, 0.0625}, -- NodeBox9
-			{-0.3125, -0.125, -0.0625, -0.5, 0, 0}, -- NodeBox10
-			{-0.3125, -0.1875, -0.125, -0.5, -0.0625, -0.0625}, -- NodeBox11
-			{-0.3125, -0.25, -0.1875, -0.5, -0.125, -0.125}, -- NodeBox12
-			{-0.3125, -0.3125, -0.25, -0.5, -0.1875, -0.1875}, -- NodeBox13
-			{-0.3125, -0.375, -0.3125, -0.5, -0.25, -0.25}, -- NodeBox14
-			{-0.3125, -0.4375, -0.375, -0.5, -0.3125, -0.3125}, -- NodeBox15
-			{-0.3125, -0.5, -0.4375, -0.5, -0.375, -0.375}, -- NodeBox16
-			{-0.3125, -0.5, -0.5, -0.5, -0.4375, -0.4375}, -- NodeBox17
+			{-0.3125, -0.5, 0.4375, -0.5, 0.375, 0.5}, 
+			{-0.3125, -1.5, -0.4375, -0.5, -0.5, -0.5}, 
+			{-0.3125, 0.375, 0.4375, -0.5, 0.5, 0.5}, 
+			{-0.3125, 0.3125, 0.375, -0.5, 0.4375, 0.4375}, 
+			{-0.3125, 0.25, 0.3125, -0.5, 0.375, 0.375}, 
+			{-0.3125, 0.1875, 0.25, -0.5, 0.3125, 0.3125}, 
+			{-0.3125, 0.125, 0.1875, -0.5, 0.25, 0.25}, 
+			{-0.3125, 0.0625, 0.125, -0.5, 0.1875, 0.1875}, 
+			{-0.3125, 0, 0.0625, -0.5, 0.125, 0.125}, 
+			{-0.3125, -0.0625, 0, -0.5, 0.0625, 0.0625}, 
+			{-0.3125, -0.125, -0.0625, -0.5, 0, 0}, 
+			{-0.3125, -0.1875, -0.125, -0.5, -0.0625, -0.0625}, 
+			{-0.3125, -0.25, -0.1875, -0.5, -0.125, -0.125}, 
+			{-0.3125, -0.3125, -0.25, -0.5, -0.1875, -0.1875}, 
+			{-0.3125, -0.375, -0.3125, -0.5, -0.25, -0.25}, 
+			{-0.3125, -0.4375, -0.375, -0.5, -0.3125, -0.3125}, 
+			{-0.3125, -0.5, -0.4375, -0.5, -0.375, -0.375}, 
+			{-0.3125, -0.5, -0.5, -0.5, -0.4375, -0.4375}, 
 
 
 		}
@@ -389,9 +399,97 @@ minetest.register_node("mydeck:stairs_raill", {
 			{-0.3125, -0.5,   -0.5,    -0.5,   0.5, 0.5 }, 
 			}
 		},
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		
+		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+
+		if nodeu == "mydeck:stairs" or
+		   nodeu == "mydeck:stairsb" or
+		   nodeu == "mydeck:stairss" or
+		   nodeu == "mydeck:stairsbs" then
+		   minetest.set_node(pos,{name = "mydeck:stairs_raill", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		else
+		
+		   minetest.set_node(pos,{name = "mydeck:stairs_raill_end", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		
+		end
+	end,
 })
 
 
+minetest.register_node("mydeck:stairs_railr_end", {
+	description = "Stairs",
+	tiles = {
+		"mydeck_hwood.png",
+		"mydeck_hwood.png",
+		"mydeck_hwood.png",
+		"mydeck_hwood.png",
+		"mydeck_hwood.png",
+		"mydeck_hwood.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drop = "mydeck:stairs_railr",
+	sunlight_propagates = true,
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{0.3125, -0.5, 0.4375, 0.5, 0.375, 0.5}, 
+			{0.3125, 0.375, 0.4375, 0.5, 0.5, 0.5}, 
+			{0.3125, 0.3125, 0.375, 0.5, 0.4375, 0.4375}, 
+			{0.3125, 0.25, 0.3125, 0.5, 0.375, 0.375}, 
+			{0.3125, 0.1875, 0.25, 0.5, 0.3125, 0.3125}, 
+			{0.3125, 0.125, 0.1875, 0.5, 0.25, 0.25}, 
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{0.3125, -0.5,   0.1875,    0.5,   0.5, 0.5 }, 
+			}
+		},
+})
+minetest.register_node("mydeck:stairs_raill_end", {
+	description = "Stairs",
+	tiles = {
+		"mydeck_hwood.png",
+		"mydeck_hwood.png",
+		"mydeck_hwood.png",
+		"mydeck_hwood.png",
+		"mydeck_hwood.png",
+		"mydeck_hwood.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drop = "mydeck:stairs_raill",
+	sunlight_propagates = true,
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5, 0.4375, -0.5, 0.375, 0.5},
+			{-0.3125, 0.375, 0.4375, -0.5, 0.5, 0.5}, 
+			{-0.3125, 0.3125, 0.375, -0.5, 0.4375, 0.4375}, 
+			{-0.3125, 0.25, 0.3125, -0.5, 0.375, 0.375}, 
+			{-0.3125, 0.1875, 0.25, -0.5, 0.3125, 0.3125}, 
+			{-0.3125, 0.125, 0.1875, -0.5, 0.25, 0.25}, 
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5,   0.1875,    -0.5,   0.5, 0.5 }, 
+			}
+		},
+})
 
 
 

@@ -1,5 +1,5 @@
 minetest.register_craftitem("mydeck:stain_brush",{
-	description = "Stain Brush",
+--	description = "Stain Brush",
 	inventory_image = "mydeck_brush.png",
 
 })
@@ -189,8 +189,17 @@ minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 	and node.name == "mydeck:lattice" then
 	minetest.set_node(pos,{name = "mydeck:lattices", param2=node.param2})
 	end
-end)
 
+	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
+	and node.name == "mydeck:stairs_raill_end" then
+	minetest.set_node(pos,{name = "mydeck:stairs_raill_ends", param2=node.param2})
+	end
+
+	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
+	and node.name == "mydeck:stairs_railr_end" then
+	minetest.set_node(pos,{name = "mydeck:stairs_railr_ends", param2=node.param2})
+	end
+end)
 
 
 
