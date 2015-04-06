@@ -13,6 +13,7 @@ minetest.register_node("mydeck:joistss", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:joists",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
@@ -63,6 +64,7 @@ minetest.register_node("mydeck:joists_sides", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:joists_side",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
@@ -115,6 +117,7 @@ minetest.register_node("mydeck:joists_ends", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:joists_end",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
@@ -147,6 +150,7 @@ minetest.register_node("mydeck:joists_side_ends", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:joists_side_end",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
@@ -180,6 +184,7 @@ minetest.register_node("mydeck:joists_endrs", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:joists_endr",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
@@ -212,6 +217,7 @@ minetest.register_node("mydeck:joists_side_endrs", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:joists_side_endr",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {

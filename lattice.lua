@@ -12,6 +12,7 @@ minetest.register_node("mydeck:lattice", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",

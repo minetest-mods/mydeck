@@ -14,6 +14,7 @@ minetest.register_node("mydeck:pile_wposts", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = {
 		max_items = 2,
 		items = {
@@ -54,6 +55,7 @@ minetest.register_node("mydeck:posts", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:post",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {

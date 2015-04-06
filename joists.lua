@@ -13,6 +13,7 @@ minetest.register_node("mydeck:joists", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -62,6 +63,7 @@ minetest.register_node("mydeck:joists_side", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -113,6 +115,7 @@ minetest.register_node("mydeck:joists_end", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -144,6 +147,7 @@ minetest.register_node("mydeck:joists_side_end", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -176,6 +180,7 @@ minetest.register_node("mydeck:joists_endr", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -207,6 +212,7 @@ minetest.register_node("mydeck:joists_side_endr", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",

@@ -12,6 +12,8 @@ minetest.register_node("mydeck:deck_boardss", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:deck_boards",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
@@ -106,6 +108,33 @@ minetest.register_node("mydeck:deck_boardss", {
 	end,
 
 })
+minetest.register_node("mydeck:deck_beams", {
+	description = "Deck on Beam Stained",
+	tiles = {
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^[transformR90^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.5, 0.125, -0.125, 0.5}, 
+			{-0.5, 0,  0.2725, 0.5, -0.125,  0.5}, 
+			{-0.5, 0,  0.0225, 0.5, -0.125,  0.25}, 
+			{-0.5, 0, -0.2275, 0.5, -0.125,  0}, 
+			{-0.5, 0, -0.4775, 0.5, -0.125, -0.25},
+		}
+	},
+})
 
 minetest.register_node("mydeck:deck_joistss", {
 	description = "Deck Joists Stained",
@@ -120,6 +149,8 @@ minetest.register_node("mydeck:deck_joistss", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = {
 		max_items = 2,
 		items = {
@@ -165,6 +196,8 @@ minetest.register_node("mydeck:deck_joists_sides", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = {
 		max_items = 2,
 		items = {
@@ -211,6 +244,8 @@ minetest.register_node("mydeck:deck_joists_ends", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = {
 		max_items = 2,
 		items = {
@@ -256,6 +291,8 @@ minetest.register_node("mydeck:deck_joists_side_ends", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = {
 		max_items = 2,
 		items = {
@@ -302,6 +339,8 @@ minetest.register_node("mydeck:deck_joists_endrs", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = {
 		max_items = 2,
 		items = {
@@ -347,6 +386,8 @@ minetest.register_node("mydeck:deck_joists_side_endrs", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	drop = {
 		max_items = 2,
 		items = {

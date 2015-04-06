@@ -11,6 +11,7 @@ minetest.register_node("mydeck:rails", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:rail",
 	sunlight_propagates = true,
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
@@ -51,6 +52,7 @@ minetest.register_node("mydeck:rail_corners", {
 	paramtype2 = "facedir",
 	drop = "mydeck:rail_corner",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -97,6 +99,7 @@ minetest.register_node("mydeck:rail_icorners", {
 	paramtype2 = "facedir",
 	drop = "mydeck:rail_icorner",
 	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
