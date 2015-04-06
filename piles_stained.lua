@@ -3,16 +3,17 @@
 minetest.register_node("mydeck:pile_wposts", {
 	description = "Pile",
 	tiles = {
-		"mydeck_piletps.png^[transformR90",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_piletp_ol.png^[transformR90",
 		"mydeck_concrete.png",
-		"mydeck_piless.png",
-		"mydeck_piless.png",
-		"mydeck_pilefs.png",
-		"mydeck_pilefs.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_piles_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_piles_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_pilef_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_pilef_ol.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = {
 		max_items = 2,
 		items = {
@@ -42,16 +43,17 @@ minetest.register_node("mydeck:pile_wposts", {
 minetest.register_node("mydeck:posts", {
 	description = "Post",
 	tiles = {
-		"mydeck_vwoods.png",
-		"mydeck_vwoods.png",
-		"mydeck_vwoods.png",
-		"mydeck_vwoods.png",
-		"mydeck_vwoods.png",
-		"mydeck_vwoods.png",
+		"mydeck_hwood.png^mydeck_tint1.png^[transformR90",
+		"mydeck_hwood.png^mydeck_tint1.png^[transformR90",
+		"mydeck_hwood.png^mydeck_tint1.png^[transformR90",
+		"mydeck_hwood.png^mydeck_tint1.png^[transformR90",
+		"mydeck_hwood.png^mydeck_tint1.png^[transformR90",
+		"mydeck_hwood.png^mydeck_tint1.png^[transformR90",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = "mydeck:post",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {

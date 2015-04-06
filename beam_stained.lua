@@ -1,16 +1,17 @@
 minetest.register_node("mydeck:beams", {
 	description = "Beam",
 	tiles = {
-		"mydeck_hwoods.png^[transformR90",
-		"mydeck_hwoods.png^[transformR90",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
+		"mydeck_hwood.png^[transformR90^mydeck_tint1.png",
+		"mydeck_hwood.png^[transformR90^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = "mydeck:beam",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
@@ -32,16 +33,17 @@ minetest.register_node("mydeck:beams", {
 minetest.register_node("mydeck:beam_wbrackets", {
 	description = "Beam with Bracket",
 	tiles = {
-		"mydeck_beambts.png",
-		"mydeck_beambbs.png",
-		"mydeck_beambss.png",
-		"mydeck_beambss.png",
-		"mydeck_beambfs.png",
-		"mydeck_beambfs.png",
+		"mydeck_hwood.png^mydeck_tint1.png^[transformR90^mydeck_beambt_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^[transformR90^mydeck_beambt_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambs_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambs_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambf_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambf_ol.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = "mydeck:beam",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
@@ -57,16 +59,17 @@ minetest.register_node("mydeck:beam_wbrackets", {
 minetest.register_node("mydeck:joists_beams", {
 	description = "Deck Joists with Beam",
 	tiles = {
-		"mydeck_vwoods.png",
-		"mydeck_vwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
+		"mydeck_hwood.png^[transformR90^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = {
 		max_items = 2,
 		items = {
@@ -100,16 +103,17 @@ minetest.register_node("mydeck:joists_beams", {
 minetest.register_node("mydeck:joists_beam_wbrackets", {
 	description = "Deck Joists with Beam and Bracket",
 	tiles = {
-		"mydeck_vwoods.png",
-		"mydeck_vwoods.png",
-		"mydeck_beambfs.png",
-		"mydeck_beambfs.png",
-		"mydeck_beambss.png",
-		"mydeck_beambss.png",
+		"mydeck_hwood.png^[transformR90^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambf_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambf_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambs_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambs_ol.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = {
 		max_items = 2,
 		items = {
@@ -145,16 +149,17 @@ minetest.register_node("mydeck:joists_beam_wbrackets", {
 minetest.register_node("mydeck:joists_side_beams", {
 	description = "Deck Joists side with Beam",
 	tiles = {
-		"mydeck_vwoods.png",
-		"mydeck_vwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
+		"mydeck_hwood.png^[transformR90^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = {
 		max_items = 2,
 		items = {
@@ -188,16 +193,17 @@ minetest.register_node("mydeck:joists_side_beams", {
 minetest.register_node("mydeck:joists_side_beam_wbrackets", {
 	description = "Deck Joists side with Beam and Bracket",
 	tiles = {
-		"mydeck_vwoods.png",
-		"mydeck_vwoods.png",
-		"mydeck_beambfs.png",
-		"mydeck_beambfs.png",
-		"mydeck_beambss.png",
-		"mydeck_beambss.png",
+		"mydeck_hwood.png^[transformR90^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambf_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambf_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambs_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambs_ol.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = {
 		max_items = 2,
 		items = {
@@ -234,16 +240,17 @@ minetest.register_node("mydeck:joists_side_beam_wbrackets", {
 minetest.register_node("mydeck:deck_joists_beams", {
 	description = "Deck Joists with Beam",
 	tiles = {
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = {
 		max_items = 3,
 		items = {
@@ -283,16 +290,17 @@ minetest.register_node("mydeck:deck_joists_beams", {
 minetest.register_node("mydeck:deck_joists_beam_wbrackets", {
 	description = "Deck Joists with Beam with Bracket",
 	tiles = {
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_beambfs.png",
-		"mydeck_beambfs.png",
-		"mydeck_beambss.png",
-		"mydeck_beambss.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambf_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambf_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambs_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambs_ol.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = {
 		max_items = 3,
 		items = {
@@ -334,16 +342,17 @@ minetest.register_node("mydeck:deck_joists_beam_wbrackets", {
 minetest.register_node("mydeck:deck_joists_side_beams", {
 	description = "Deck Joists side with Beam",
 	tiles = {
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = {
 		max_items = 3,
 		items = {
@@ -383,16 +392,17 @@ minetest.register_node("mydeck:deck_joists_side_beams", {
 minetest.register_node("mydeck:deck_joists_side_beam_wbrackets", {
 	description = "Deck Joists side with Beam with Bracket",
 	tiles = {
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_beambfs.png",
-		"mydeck_beambfs.png",
-		"mydeck_beambss.png",
-		"mydeck_beambss.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambf_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambf_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambs_ol.png",
+		"mydeck_hwood.png^mydeck_tint1.png^mydeck_beambs_ol.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	drop = {
 		max_items = 3,
 		items = {

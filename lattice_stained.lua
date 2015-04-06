@@ -1,12 +1,12 @@
 minetest.register_node("mydeck:lattices", {
 	description = "Lattice",
 	tiles = {
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
-		"mydeck_hwoods.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
+		"mydeck_hwood.png^mydeck_tint1.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",

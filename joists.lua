@@ -2,8 +2,8 @@
 minetest.register_node("mydeck:joists", {
 	description = "Deck Joists",
 	tiles = {
-		"mydeck_vwood.png",
-		"mydeck_vwood.png",
+		"mydeck_hwood.png^[transformR90",
+		"mydeck_hwood.png^[transformR90",
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
@@ -12,6 +12,7 @@ minetest.register_node("mydeck:joists", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -50,8 +51,8 @@ minetest.register_node("mydeck:joists", {
 minetest.register_node("mydeck:joists_side", {
 	description = "Deck Joists Side",
 	tiles = {
-		"mydeck_vwood.png",
-		"mydeck_vwood.png",
+		"mydeck_hwood.png^[transformR90",
+		"mydeck_hwood.png^[transformR90",
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
@@ -60,6 +61,7 @@ minetest.register_node("mydeck:joists_side", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -100,16 +102,17 @@ minetest.register_node("mydeck:joists_side", {
 minetest.register_node("mydeck:joists_end", {
 	description = "Deck Joists with End Plate",
 	tiles = {
-		"mydeck_joistend.png^[transformR180",
-		"mydeck_joistend.png",
-		"mydeck_joistend.png^[transformR90",
-		"mydeck_joistend.png^[transformR270",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180",
+		"mydeck_hwood.png^mydeck_joistend_ol.png",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR90",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR270",
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -130,16 +133,17 @@ minetest.register_node("mydeck:joists_end", {
 minetest.register_node("mydeck:joists_side_end", {
 	description = "Deck Joists Side with End Plate",
 	tiles = {
-		"mydeck_joistend.png",
-		"mydeck_joistend.png^[transformR180",
-		"mydeck_joistend.png^[transformR270",
-		"mydeck_joistend.png^[transformR90",
+		"mydeck_hwood.png^mydeck_joistend_ol.png",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR270",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR90",
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -161,16 +165,17 @@ minetest.register_node("mydeck:joists_side_end", {
 minetest.register_node("mydeck:joists_endr", {
 	description = "Deck Joists Side with Wall Plate",
 	tiles = {
-		"mydeck_joistend.png",
-		"mydeck_joistend.png^[transformR180",
-		"mydeck_joistend.png^[transformR270",
-		"mydeck_joistend.png^[transformR90",
+		"mydeck_hwood.png^mydeck_joistend_ol.png",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR270",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR90",
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
@@ -191,16 +196,17 @@ minetest.register_node("mydeck:joists_endr", {
 minetest.register_node("mydeck:joists_side_endr", {
 	description = "Deck Joists Side with Wall Plate",
 	tiles = {
-		"mydeck_joistend.png^[transformR180",
-		"mydeck_joistend.png",
-		"mydeck_joistend.png^[transformR90",
-		"mydeck_joistend.png^[transformR270",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180",
+		"mydeck_hwood.png^mydeck_joistend_ol.png",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR90",
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR270",
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
 	node_box = {
 		type = "fixed",
