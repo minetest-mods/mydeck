@@ -27,7 +27,7 @@ minetest.register_node("mydeck:pile_wposts", {
 		}
 		},
 
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -57,7 +57,7 @@ minetest.register_node("mydeck:posts", {
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:post",
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {

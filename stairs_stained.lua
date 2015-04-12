@@ -14,7 +14,7 @@ minetest.register_node("mydeck:stairss", {
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:stairs",
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -110,7 +110,7 @@ minetest.register_node("mydeck:stairsbs", {
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:stairs",
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -184,7 +184,7 @@ minetest.register_node("mydeck:stairs_ocorners", {
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:stairs_ocorner",
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -250,7 +250,7 @@ minetest.register_node("mydeck:stairs_icorners", {
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:stairs_icorner",
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -318,7 +318,7 @@ minetest.register_node("mydeck:stairs_railrs", {
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:stairs_railr",
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -367,7 +367,7 @@ minetest.register_node("mydeck:stairs_raills", {
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:stairs_raill",
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -419,7 +419,7 @@ minetest.register_node("mydeck:stairs_railr_ends", {
 	drop = "mydeck:stairs_railr",
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -456,7 +456,7 @@ minetest.register_node("mydeck:stairs_raill_ends", {
 	drop = "mydeck:stairs_raill",
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {

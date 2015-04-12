@@ -15,7 +15,7 @@ minetest.register_node("mydeck:deck_boardss", {
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
 	drop = "mydeck:deck_boards",
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -123,7 +123,7 @@ minetest.register_node("mydeck:deck_beams", {
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -163,7 +163,7 @@ minetest.register_node("mydeck:deck_joistss", {
 		}
 		},
 
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -209,7 +209,7 @@ minetest.register_node("mydeck:deck_joists_sides", {
 			},
 		}
 		},
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -257,7 +257,7 @@ minetest.register_node("mydeck:deck_joists_ends", {
 			},
 		}
 		},
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -304,7 +304,7 @@ minetest.register_node("mydeck:deck_joists_side_ends", {
 			},
 		}
 		},
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -352,7 +352,7 @@ minetest.register_node("mydeck:deck_joists_endrs", {
 			},
 		}
 		},
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -399,7 +399,7 @@ minetest.register_node("mydeck:deck_joists_side_endrs", {
 			},
 		}
 		},
-	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
 		fixed = {

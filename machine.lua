@@ -311,7 +311,14 @@ then
 ----------------------------------------------------------------------------------
 --register nodes
 ----------------------------------------------------------------------------------
-		if ingotstack:get_name()=="default:wood" then
+local gwood = minetest.registered_aliases[ingotstack:get_name()]
+if not gwood then
+    gwood = ingotstack:get_name()
+end
+local allwood = minetest.registered_items[gwood]
+
+if allwood and allwood.groups and allwood.groups["wood"] then
+--		if ingotstack:get_name()=="default:wood" then
 				make_ok = "1"
 		end
 
