@@ -17,7 +17,7 @@ minetest.register_node("mydeck:machine", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=2},
+	groups = {choppy=2},
 	node_box = {
 		type = "fixed",
 		fixed = {
