@@ -1,7 +1,11 @@
 local material = {}
 local shape = {}
 local make_ok = {}
+local make_ok2 = {}
+local make_ok3 = {}
 local anzahl = {}
+local brushcount = {}
+local cbruchcount = {}
 
 minetest.register_node("mydeck:machine", {
 	description = "Deck Machine",
@@ -53,48 +57,79 @@ can_dig = function(pos,player)
 		return false
 	elseif not inv:is_empty("res") then
 		return false
+	elseif not inv:is_empty("wool") then
+		return false
+	elseif not inv:is_empty("steel") then
+		return false
+	elseif not inv:is_empty("stick") then
+		return false
+	elseif not inv:is_empty("brush") then
+		return false
+	elseif not inv:is_empty("dye") then
+		return false
+	elseif not inv:is_empty("cbrush") then
+		return false
 	end
 	return true
 end,
 
 on_construct = function(pos)
 	local meta = minetest.env:get_meta(pos)
-	meta:set_string("formspec", "invsize[10,11;]"..
-		"background[-0.15,-0.25;10.40,11.75;mydeck_background.png]"..
-		"label[4,5;Wood:]"..
-		"list[current_name;ingot;4,5.5;1,1;]"..
-		"label[6.5,5;Output:]"..
-		"list[current_name;res;6.5,5.5;1,1;]"..
-		"label[0,0;Choose Deck Parts:]"..
+	meta:set_string("formspec", "invsize[12,10;]"..
+		"background[-0.15,-0.25;12.40,10.75;mydeck_background.png]"..
+		"label[6,4;Wood:]"..
+		"list[current_name;ingot;6,4.5;1,1;]"..
+		"label[7.5,4;Output:]"..
+		"list[current_name;res;7.5,4.5;1,1;]"..
 		"label[0.5,0.5;Joists]"..
-		"image_button[0.5,1;1,1;mydeck_mach1.png;joists; ]"..
-		"image_button[1.5,1;1,1;mydeck_mach2.png;joistside; ]"..
-		"image_button[2.5,1;1,1;mydeck_mach3.png;joistend; ]"..
-		"image_button[3.5,1;1,1;mydeck_mach4.png;joistsidend; ]"..
-		"image_button[4.5,1;1,1;mydeck_mach5.png;joistendr; ]"..
-		"image_button[5.5,1;1,1;mydeck_mach6.png;joistsidendr; ]"..
-		"image_button[7,1;1,1;mydeck_mach20.png;brush; ]"..
+		"item_image_button[0.5,1;1,1;mydeck:joists;joists; ]"..
+		"item_image_button[1.5,1;1,1;mydeck:joists_side;joistside; ]"..
+		"item_image_button[2.5,1;1,1;mydeck:joists_end;joistend; ]"..
+		"item_image_button[3.5,1;1,1;mydeck:joists_side_end;joistsidend; ]"..
+		"item_image_button[4.5,1;1,1;mydeck:joists_endr;joistendr; ]"..
+		"item_image_button[5.5,1;1,1;mydeck:joists_side_endr;joistsidendr; ]"..
 		"label[0.5,2;Pile Post Beam and Stairs]"..
-		"image_button[0.5,2.5;1,1;mydeck_mach7.png;pile; ]"..
-		"image_button[1.5,2.5;1,1;mydeck_mach8.png;post; ]"..
-		"image_button[2.5,2.5;1,1;mydeck_mach9.png;beam; ]"..
-		"image_button[3.5,2.5;1,1;mydeck_mach14.png;stairs; ]"..
-		"image_button[4.5,2.5;1,1;mydeck_mach15.png;stairso; ]"..
-		"image_button[5.5,2.5;1,1;mydeck_mach16.png;stairsi; ]"..
-		"image_button[6.5,2.5;1,1;mydeck_mach17.png;sraill; ]"..
-		"image_button[7.5,2.5;1,1;mydeck_mach18.png;srailr; ]"..
+		"item_image_button[0.5,2.5;1,1;mydeck:pile;pile; ]"..
+		"item_image_button[1.5,2.5;1,1;mydeck:post;post; ]"..
+		"item_image_button[2.5,2.5;1,1;mydeck:beam;beam; ]"..
+		"item_image_button[3.5,2.5;1,1;mydeck:stairs;stairs; ]"..
+		"item_image_button[4.5,2.5;1,1;mydeck:stairs_ocorner;stairso; ]"..
+		"item_image_button[5.5,2.5;1,1;mydeck:stairs_icorner;stairsi; ]"..
+		"item_image_button[6.5,2.5;1,1;mydeck:stairs_raill;sraill; ]"..
+		"item_image_button[7.5,2.5;1,1;mydeck:stairs_railr;srailr; ]"..
 		"label[0.5,3.5;Deck Boards and Rail]"..
-		"image_button[0.5,4;1,1;mydeck_mach10.png;deckb; ]"..
-		"image_button[1.5,4;1,1;mydeck_mach11.png;rail; ]"..
-		"image_button[2.5,4;1,1;mydeck_mach12.png;railc; ]"..
-		"image_button[3.5,4;1,1;mydeck_mach13.png;railic; ]"..
-		"image_button[4.5,4;1,1;mydeck_mach19.png;lattice; ]"..
+		"item_image_button[0.5,4;1,1;mydeck:deck_boards;deckb; ]"..
+		"item_image_button[1.5,4;1,1;mydeck:rail;rail; ]"..
+		"item_image_button[2.5,4;1,1;mydeck:rail_corner;railc; ]"..
+		"item_image_button[3.5,4;1,1;mydeck:rail_icorner;railic; ]"..
+		"item_image_button[4.5,4;1,1;mydeck:lattice;lattice; ]"..
 
-		"list[current_player;main;1,7;8,4;]")
+		"label[9.5,0.5;Craft Stain Brush]"..
+		"label[10.5,1;Wool]"..
+		"list[current_name;wool;9.5,1;1,1;]"..
+		"label[10.5,2;Steel Ingot]"..
+		"list[current_name;steel;9.5,2;1,1;]"..
+		"label[10.5,3;Stick]"..
+		"list[current_name;stick;9.5,3;1,1;]"..
+		"button[9.5,4;1,1;mbrush;Make]"..
+		"label[10.5,5;Brush]"..
+		"list[current_name;brush;9.5,5;1,1;]"..
+		"label[10.5,6;Dye]"..
+		"list[current_name;dye;9.5,6;1,1;]"..
+		"button[9.5,7;1,1;mcbrush;Make]"..
+		"list[current_name;cbrush;9.5,8;1,1;]"..
+
+		"list[current_player;main;0.5,6;8,4;]")
 	meta:set_string("infotext", "Deck Machine")
 	local inv = meta:get_inventory()
 	inv:set_size("ingot", 1)
 	inv:set_size("res", 1)
+	inv:set_size("wool", 1)
+	inv:set_size("steel", 1)
+	inv:set_size("stick", 1)
+	inv:set_size("brush", 1)
+	inv:set_size("dye", 1)
+	inv:set_size("cbrush", 1)
 end,
 
 on_receive_fields = function(pos, formname, fields, sender)
@@ -107,7 +142,6 @@ or fields["joistend"]
 or fields["joistsidend"] 
 or fields["joistendr"]
 or fields["joistsidendr"]
-or fields["brush"]
 
 or fields["pile"]
 or fields["post"]
@@ -174,15 +208,6 @@ then
 		make_ok = "0"
 		anzahl = "2"
 		shape = "mydeck:joists_side_end"
-		if inv:is_empty("ingot") then
-			return
-		end
-	end
-
-	if fields["brush"] then
-		make_ok = "0"
-		anzahl = "2"
-		shape = "mydeck:stain_brush"
 		if inv:is_empty("ingot") then
 			return
 		end
@@ -312,12 +337,12 @@ then
 --register nodes
 ----------------------------------------------------------------------------------
 local gwood = minetest.registered_aliases[ingotstack:get_name()]
-if not gwood then
-    gwood = ingotstack:get_name()
-end
+	if not gwood then
+	    gwood = ingotstack:get_name()
+	end
 local allwood = minetest.registered_items[gwood]
 
-if allwood and allwood.groups and allwood.groups["wood"] then
+	if allwood and allwood.groups and allwood.groups["wood"] then
 --		if ingotstack:get_name()=="default:wood" then
 				make_ok = "1"
 		end
@@ -331,10 +356,98 @@ if allwood and allwood.groups and allwood.groups["wood"] then
 			ingotstack:take_item()
 			inv:set_stack("ingot",1,ingotstack)
 		end            	
-end
-end
+end --if fields
+
+local color_tab = {
+{"black", 	"Black",		"^[colorize:black:200"},
+{"blue", 	"Blue",			"^[colorize:#0B0B3B:150"},
+{"brown", 	"Brown",		"^[colorize:#190B07:140"},
+{"cyan", 	"Cyan",			"^[colorize:cyan:75"},
+{"dark_green", 	"Dark Green",		"^[colorize:#071907:150"},
+{"dark_grey", 	"Dark Grey",		"^[colorize:#1C1C1C:150"},
+{"green", 	"Green",		"^[colorize:green:75"},
+{"grey", 	"Grey",			"^[colorize:#848484:100"},
+{"magenta", 	"Magenta",		"^[colorize:magenta:75"},
+{"orange",	"Orange",		"^[colorize:orange:75"},
+{"pink", 	"Pink",			"^[colorize:#FE2E9A:75"},
+{"red", 	"Red",			"^[colorize:#B40404:75"},
+{"violet", 	"Violet",		"^[colorize:#08088A:100"},
+{"white", 	"White",		"^[colorize:white:100"},
+{"yellow", 	"Yellow",		"^[colorize:yellow:75"},
+}
+for i in ipairs (color_tab) do
+local col = color_tab[i][1]
+local coldesc = color_tab[i][2]
+local alpha = color_tab[i][3]
 
 
+		local woolstack = inv:get_stack("wool", 1)
+		local steelstack = inv:get_stack("steel", 1)
+		local stickstack = inv:get_stack("stick", 1)
+		local brushstack = inv:get_stack("brush", 1)
+		local dyestack = inv:get_stack("dye", 1)
+
+if fields["mbrush"]
+then
+	if fields["mbrush"] then
+		make_ok2 = "0"
+		if inv:is_empty("wool") or
+		   inv:is_empty("steel") or
+		   inv:is_empty("stick") then
+		return
+		end
+	end
+
+	if woolstack:get_name()== "wool:"..col and
+	   steelstack:get_name()=="default:steel_ingot" and
+	   stickstack:get_name()== "default:stick" then
+			material = "mydeck:stain_brush"
+			make_ok2 = "1"
+	end
+
+	if inv:is_empty("brush") and
+	   make_ok2 == "1" then
+		inv:add_item("brush",material)
+		woolstack:take_item()
+		inv:set_stack("wool",1,woolstack)
+		steelstack:take_item()
+		inv:set_stack("steel",1,steelstack)
+		stickstack:take_item()
+		inv:set_stack("stick",1,stickstack)
+	end
+
+end --if fields
+
+if fields["mcbrush"]
+then
+
+	if fields["mcbrush"] then
+		make_ok3 = "0"
+		if inv:is_empty("brush") or
+		   inv:is_empty("dye") then
+			return
+		end
+	end
+
+		if brushstack:get_name()=="mydeck:stain_brush" and
+		   dyestack:get_name()=="dye:"..col then
+				material = "mydeck:stain_brush_"..col
+				make_ok3 = "1"
+		end
+
+	if inv:is_empty("cbrush") and 
+	   make_ok3 == "1" then
+		inv:add_item("cbrush",material)	
+		brushstack:take_item()
+		inv:set_stack("brush",1,brushstack)
+		dyestack:take_item()
+		inv:set_stack("dye",1,dyestack)
+	end
+	
+
+end --if fields
+end --color table
+end --on_recieve
 })
 
 --Craft
@@ -345,7 +458,7 @@ minetest.register_craft({
 			{'', '', ''},
 			{'default:wood', 'default:tree', 'default:wood'},
 			{'default:tree', "default:wood", 'default:tree'},		
-		},
+		}
 })
 
 

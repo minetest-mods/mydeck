@@ -1,211 +1,2070 @@
+
+local USES = 200
+
+local color_tab = {
+{"black", 	"Black",		"^[colorize:black:200"},
+{"blue", 	"Blue",			"^[colorize:#0B0B3B:150"},
+{"brown", 	"Brown",		"^[colorize:#190B07:140"},
+{"cyan", 	"Cyan",			"^[colorize:cyan:75"},
+{"dark_green", 	"Dark Green",		"^[colorize:#071907:150"},
+{"dark_grey", 	"Dark Grey",		"^[colorize:#1C1C1C:150"},
+{"green", 	"Green",		"^[colorize:green:75"},
+{"grey", 	"Grey",			"^[colorize:#848484:100"},
+{"magenta", 	"Magenta",		"^[colorize:magenta:75"},
+{"orange",	"Orange",		"^[colorize:orange:75"},
+{"pink", 	"Pink",			"^[colorize:#FE2E9A:75"},
+{"red", 	"Red",			"^[colorize:#B40404:75"},
+{"violet", 	"Violet",		"^[colorize:#08088A:100"},
+{"white", 	"White",		"^[colorize:white:100"},
+{"yellow", 	"Yellow",		"^[colorize:yellow:75"},
+}
+for i in ipairs (color_tab) do
+local col = color_tab[i][1]
+local coldesc = color_tab[i][2]
+local alpha = color_tab[i][3]
+
+
+
+
 minetest.register_craftitem("mydeck:stain_brush",{
---	description = "Stain Brush",
-	inventory_image = "mydeck_brush.png",
+	description = "Stain Brush",
+	inventory_image = "mydeck_paint_brush.png",
+	stack_max = 1,
 
 })
 
-minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_boards" then
-	minetest.set_node(pos,{name = "mydeck:deck_boardss", param2=node.param2})
+minetest.register_tool("mydeck:stain_brush_"..col, {
+	description = coldesc.." Stain Brush",
+	inventory_image = "mydeck_paint_brush_"..col..".png",
+	groups = {not_in_creative_inventory=1},
+	on_use = function(itemstack, user, pointed_thing)
+
+	if pointed_thing.type ~= "node" then
+		return
+	end
+	local pos = pointed_thing.under
+	local node = minetest.get_node(pos)
+
+	if node.name == "mydeck:deck_boards" then
+	minetest.set_node(pos,{name = "mydeck:deck_boardss_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_joists" then
-	minetest.set_node(pos,{name = "mydeck:deck_joistss", param2=node.param2})
+	if node.name == "mydeck:deck_joists" then
+	minetest.set_node(pos,{name = "mydeck:deck_joistss_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_joists_side" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_sides", param2=node.param2})
+	if node.name == "mydeck:deck_joists_side" then
+	minetest.set_node(pos,{name = "mydeck:deck_joists_sides_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_joists_end" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_ends", param2=node.param2})
+	if node.name == "mydeck:deck_joists_end" then
+	minetest.set_node(pos,{name = "mydeck:deck_joists_ends_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_joists_side_end" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_side_ends", param2=node.param2})
+	if node.name == "mydeck:deck_joists_side_end" then
+	minetest.set_node(pos,{name = "mydeck:deck_joists_side_ends_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_joists_endr" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_endrs", param2=node.param2})
+	if node.name == "mydeck:deck_joists_endr" then
+	minetest.set_node(pos,{name = "mydeck:deck_joists_endrs_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_joists_side_endr" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_side_endrs", param2=node.param2})
+	if node.name == "mydeck:deck_joists_side_endr" then
+	minetest.set_node(pos,{name = "mydeck:deck_joists_side_endrs_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:rail" then
-	minetest.set_node(pos,{name = "mydeck:rails", param2=node.param2})
+	if node.name == "mydeck:rail" then
+	minetest.set_node(pos,{name = "mydeck:rails_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:rail_corner" then
-	minetest.set_node(pos,{name = "mydeck:rail_corners", param2=node.param2})
+	if node.name == "mydeck:rail_corner" then
+	minetest.set_node(pos,{name = "mydeck:rail_corners_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:rail_icorner" then
-	minetest.set_node(pos,{name = "mydeck:rail_icorners", param2=node.param2})
+	if node.name == "mydeck:rail_icorner" then
+	minetest.set_node(pos,{name = "mydeck:rail_icorners_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:beam" then
-	minetest.set_node(pos,{name = "mydeck:beams", param2=node.param2})
+	if node.name == "mydeck:beam" then
+	minetest.set_node(pos,{name = "mydeck:beams_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:beam_wbracket" then
-	minetest.set_node(pos,{name = "mydeck:beam_wbrackets", param2=node.param2})
+	if node.name == "mydeck:beam_wbracket" then
+	minetest.set_node(pos,{name = "mydeck:beam_wbrackets_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:joists_beam" then
-	minetest.set_node(pos,{name = "mydeck:joists_beams", param2=node.param2})
+	if node.name == "mydeck:joists_beam" then
+	minetest.set_node(pos,{name = "mydeck:joists_beams_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:joists_beam_wbracket" then
-	minetest.set_node(pos,{name = "mydeck:joists_beam_wbrackets", param2=node.param2})
+	if node.name == "mydeck:joists_beam_wbracket" then
+	minetest.set_node(pos,{name = "mydeck:joists_beam_wbrackets_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:joists_side_beam" then
-	minetest.set_node(pos,{name = "mydeck:joists_side_beams", param2=node.param2})
+	if node.name == "mydeck:joists_side_beam" then
+	minetest.set_node(pos,{name = "mydeck:joists_side_beams_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:joists_side_beam_wbracket" then
-	minetest.set_node(pos,{name = "mydeck:joists_side_beam_wbrackets", param2=node.param2})
+	if node.name == "mydeck:joists_side_beam_wbracket" then
+	minetest.set_node(pos,{name = "mydeck:joists_side_beam_wbrackets_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_joists_beam" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_beams", param2=node.param2})
+	if node.name == "mydeck:deck_joists_beam" then
+	minetest.set_node(pos,{name = "mydeck:deck_joists_beams_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_joists_beam_wbracket" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_beam_wbrackets", param2=node.param2})
+	if node.name == "mydeck:deck_joists_beam_wbracket" then
+	minetest.set_node(pos,{name = "mydeck:deck_joists_beam_wbrackets_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_joists_side_beam" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_side_beams", param2=node.param2})
+	if node.name == "mydeck:deck_joists_side_beam" then
+	minetest.set_node(pos,{name = "mydeck:deck_joists_side_beams_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_joists_side_beam_wbracket" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_side_beam_wbrackets", param2=node.param2})
+	if node.name == "mydeck:deck_joists_side_beam_wbracket" then
+	minetest.set_node(pos,{name = "mydeck:deck_joists_side_beam_wbrackets_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:joists" then
-	minetest.set_node(pos,{name = "mydeck:joistss", param2=node.param2})
+	if node.name == "mydeck:joists" then
+	minetest.set_node(pos,{name = "mydeck:joistss_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:joists_side" then
-	minetest.set_node(pos,{name = "mydeck:joists_sides", param2=node.param2})
+	if node.name == "mydeck:joists_side" then
+	minetest.set_node(pos,{name = "mydeck:joists_sides_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:joists_end" then
-	minetest.set_node(pos,{name = "mydeck:joists_ends", param2=node.param2})
+	if node.name == "mydeck:joists_end" then
+	minetest.set_node(pos,{name = "mydeck:joists_ends_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:joists_side_end" then
-	minetest.set_node(pos,{name = "mydeck:joists_side_ends", param2=node.param2})
+	if node.name == "mydeck:joists_side_end" then
+	minetest.set_node(pos,{name = "mydeck:joists_side_ends_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:joists_endr" then
-	minetest.set_node(pos,{name = "mydeck:joists_endrs", param2=node.param2})
+	if node.name == "mydeck:joists_endr" then
+	minetest.set_node(pos,{name = "mydeck:joists_endrs_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:joists_side_endr" then
-	minetest.set_node(pos,{name = "mydeck:joists_side_endrs", param2=node.param2})
+	if node.name == "mydeck:joists_side_endr" then
+	minetest.set_node(pos,{name = "mydeck:joists_side_endrs_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:pile" then
-	minetest.set_node(pos,{name = "mydeck:piles", param2=node.param2})
+	if node.name == "mydeck:pile" then
+	minetest.set_node(pos,{name = "mydeck:piles_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:pile_wpost" then
-	minetest.set_node(pos,{name = "mydeck:pile_wposts", param2=node.param2})
+	if node.name == "mydeck:pile_wpost" then
+	minetest.set_node(pos,{name = "mydeck:pile_wposts_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:post" then
-	minetest.set_node(pos,{name = "mydeck:posts", param2=node.param2})
+	if node.name == "mydeck:post" then
+	minetest.set_node(pos,{name = "mydeck:posts_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:stairs" then
-	minetest.set_node(pos,{name = "mydeck:stairss", param2=node.param2})
+	if node.name == "mydeck:stairs" then
+	minetest.set_node(pos,{name = "mydeck:stairss_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:stairsb" then
-	minetest.set_node(pos,{name = "mydeck:stairsbs", param2=node.param2})
+	if node.name == "mydeck:stairsb" then
+	minetest.set_node(pos,{name = "mydeck:stairsbs_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:stairs_ocorner" then
-	minetest.set_node(pos,{name = "mydeck:stairs_ocorners", param2=node.param2})
+	if node.name == "mydeck:stairs_ocorner" then
+	minetest.set_node(pos,{name = "mydeck:stairs_ocorners_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:stairs_icorner" then
-	minetest.set_node(pos,{name = "mydeck:stairs_icorners", param2=node.param2})
+	if node.name == "mydeck:stairs_icorner" then
+	minetest.set_node(pos,{name = "mydeck:stairs_icorners_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:stairs_icorner" then
-	minetest.set_node(pos,{name = "mydeck:stairs_icorners", param2=node.param2})
+	if node.name == "mydeck:stairs_icorner" then
+	minetest.set_node(pos,{name = "mydeck:stairs_icorners_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:stairs_railr" then
-	minetest.set_node(pos,{name = "mydeck:stairs_railrs", param2=node.param2})
+	if node.name == "mydeck:stairs_railr" then
+	minetest.set_node(pos,{name = "mydeck:stairs_railrs_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:stairs_raill" then
-	minetest.set_node(pos,{name = "mydeck:stairs_raills", param2=node.param2})
+	if node.name == "mydeck:stairs_raill" then
+	minetest.set_node(pos,{name = "mydeck:stairs_raills_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:lattice" then
-	minetest.set_node(pos,{name = "mydeck:lattices", param2=node.param2})
+	if node.name == "mydeck:lattice" then
+	minetest.set_node(pos,{name = "mydeck:lattices_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:stairs_raill_end" then
-	minetest.set_node(pos,{name = "mydeck:stairs_raill_ends", param2=node.param2})
+	if node.name == "mydeck:stairs_raill_end" then
+	minetest.set_node(pos,{name = "mydeck:stairs_raill_ends_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:stairs_railr_end" then
-	minetest.set_node(pos,{name = "mydeck:stairs_railr_ends", param2=node.param2})
+	if node.name == "mydeck:stairs_railr_end" then
+	minetest.set_node(pos,{name = "mydeck:stairs_railr_ends_"..col, param2=node.param2})
 	end
 
-	if puncher:get_wielded_item():get_name() == "mydeck:stain_brush"
-	and node.name == "mydeck:deck_beam" then
-	minetest.set_node(pos,{name = "mydeck:deck_beams", param2=node.param2})
+	if node.name == "mydeck:deck_beam" then
+	minetest.set_node(pos,{name = "mydeck:deck_beams_"..col, param2=node.param2})
 	end
-end)
 
+	if node.name == "mydeck:deck_boardss" then
+	minetest.set_node(pos,{name = "mydeck:deck_boardss_"..col, param2=node.param2})
+	end
+	if not minetest.setting_getbool("creative_mode") then
+		itemstack:add_wear(65535 / (USES - 1))
+	end
+	return itemstack
+
+end
+})
+
+minetest.register_node("mydeck:deck_boardss_"..col, {
+	description = "Deck Boards Stained",
+	tiles = {"mydeck_hwood.png"..alpha},
+
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:deck_boards",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1,stain=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.375,  0.2725, 0.5, -0.5,  0.5}, 
+			{-0.5, -0.375,  0.0225, 0.5, -0.5,  0.25}, 
+			{-0.5, -0.375, -0.2275, 0.5, -0.5,  0}, 
+			{-0.5, -0.375, -0.4775, 0.5, -0.5, -0.25}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.375,  -0.5, 0.5, -0.5,  0.5}, 
+		}
+	},
+
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		
+		local deck = minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).name
+		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+
+		
+		if node == "mydeck:joists" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:joists" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+		if node == "mydeck:joists_side" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:joists_side" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+		if node == "mydeck:joists_beam" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:joists_beam" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_beam", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+
+		if node == "mydeck:joists_side_beam" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:joists_side_beam" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_beam", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+
+		if node == "mydeck:joists_end" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:joists_end" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_end", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+
+		if node == "mydeck:joists_side_end" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:joists_side_end" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_end", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+
+		if node == "mydeck:joists_endr" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:joists_endr" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_endr", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+
+		if node == "mydeck:joists_side_endr" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:joists_side_endr" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_endr", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+
+		if node == "mydeck:joists_beam_wbracket" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:joists_beam_wbracket" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+
+		if node == "mydeck:joists_side_beam_wbracket" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:joists_side_beam_wbracket" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+	end,
+
+})
+minetest.register_node("mydeck:deck_beams_"..col, {
+	description = "Deck on Beam Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.5, 0.125, -0.125, 0.5}, 
+			{-0.5, 0,  0.2725, 0.5, -0.125,  0.5}, 
+			{-0.5, 0,  0.0225, 0.5, -0.125,  0.25}, 
+			{-0.5, 0, -0.2275, 0.5, -0.125,  0}, 
+			{-0.5, 0, -0.4775, 0.5, -0.125, -0.25},
+		}
+	},
+})
+
+minetest.register_node("mydeck:deck_joistss_"..col, {
+	description = "Deck Joists Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:deck_boards"},
+			},
+			{
+			items = {"mydeck:joists"},
+			},
+		}
+		},
+
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, 0.375,  0.2725, 0.5, 0.5,  0.5}, 
+			{-0.5, 0.375,  0.0225, 0.5, 0.5,  0.25}, 
+			{-0.5, 0.375, -0.2275, 0.5, 0.5,  0}, 
+			{-0.5, 0.375, -0.4775, 0.5, 0.5, -0.25},  
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.5, 0.5}, 
+		}
+	},
+})
+
+minetest.register_node("mydeck:deck_joists_sides_"..col, {
+	description = "Deck Joists Side Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:deck_boards"},
+			},
+			{
+			items = {"mydeck:joists_side"},
+			},
+		}
+		},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{0.375, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, 0.375,  0.2725, 0.5, 0.5,  0.5}, 
+			{-0.5, 0.375,  0.0225, 0.5, 0.5,  0.25}, 
+			{-0.5, 0.375, -0.2275, 0.5, 0.5,  0}, 
+			{-0.5, 0.375, -0.4775, 0.5, 0.5, -0.25}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.5, 0.5}, 
+		}
+	},
+})
+
+
+minetest.register_node("mydeck:deck_joists_ends_"..col, {
+	description = "Deck Joists with End Plate Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:deck_boards"},
+			},
+			{
+			items = {"mydeck:joists_end"},
+			},
+		}
+		},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, 0, 0.375, 0.5, 0.375, 0.5}, 
+			{-0.5, 0.375,  0.2725, 0.5, 0.5,  0.5}, 
+			{-0.5, 0.375,  0.0225, 0.5, 0.5,  0.25}, 
+			{-0.5, 0.375, -0.2275, 0.5, 0.5,  0}, 
+			{-0.5, 0.375, -0.4775, 0.5, 0.5, -0.25}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.5, 0.5}, 
+		}
+	},
+})
+
+minetest.register_node("mydeck:deck_joists_side_ends_"..col, {
+	description = "Deck Joists Side with End Plate Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:deck_boards"},
+			},
+			{
+			items = {"mydeck:joists_side_end"},
+			},
+		}
+		},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, 0, -0.5, 0.5, 0.375, -0.375}, 
+			{0.375, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, 0.375,  0.2725, 0.5, 0.5,  0.5}, 
+			{-0.5, 0.375,  0.0225, 0.5, 0.5,  0.25}, 
+			{-0.5, 0.375, -0.2275, 0.5, 0.5,  0}, 
+			{-0.5, 0.375, -0.4775, 0.5, 0.5, -0.25}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.5, 0.5}, 
+		}
+	},
+})
+
+minetest.register_node("mydeck:deck_joists_endrs_"..col, {
+	description = "Deck Joists Side with Wall Plate stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:deck_boards"},
+			},
+			{
+			items = {"mydeck:joists_endr"},
+			},
+		}
+		},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, 0, -0.5, 0.5, 0.375, -0.375}, 
+			{-0.5, 0.375,  0.2725, 0.5, 0.5,  0.5}, 
+			{-0.5, 0.375,  0.0225, 0.5, 0.5,  0.25}, 
+			{-0.5, 0.375, -0.2275, 0.5, 0.5,  0}, 
+			{-0.5, 0.375, -0.4775, 0.5, 0.5, -0.25}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.5, 0.5}, 
+		}
+	},
+})
+
+minetest.register_node("mydeck:deck_joists_side_endrs_"..col, {
+	description = "Deck Joists Side with Wall Plate Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:deck_boards"},
+			},
+			{
+			items = {"mydeck:joists_side_endr"},
+			},
+		}
+		},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, 0, 0.5, 0.5, 0.375, 0.375}, 
+			{0.375, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, 0.375,  0.2725, 0.5, 0.5,  0.5}, 
+			{-0.5, 0.375,  0.0225, 0.5, 0.5,  0.25}, 
+			{-0.5, 0.375, -0.2275, 0.5, 0.5,  0}, 
+			{-0.5, 0.375, -0.4775, 0.5, 0.5, -0.25}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.5, 0.5}, 
+		}
+	},
+})
+minetest.register_node("mydeck:beams_"..col, {
+	description = "Beam",
+	tiles = {
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:beam",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.5, 0.125, 0, 0.5}, 
+		}
+	},
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		
+		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+
+
+		if node == "mydeck:post" then
+		   minetest.set_node(pos,{name = "mydeck:beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+	end
+})
+minetest.register_node("mydeck:beam_wbrackets_"..col, {
+	description = "Beam with Bracket",
+	tiles = {
+		"mydeck_hwood.png"..alpha.."^[transformR90^mydeck_beambt_ol.png",
+		"mydeck_hwood.png"..alpha.."^[transformR90^mydeck_beambt_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambs_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambs_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambf_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambf_ol.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:beam",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125,  -0.5, -0.5,    0.125,   0,      0.5}, 
+			{0.125,   -0.5, -0.125,  0.1875, -0.1875, 0.125}, 
+			{-0.1875, -0.5, -0.125, -0.125,  -0.1875, 0.125}, 
+		}
+	}
+})
+
+minetest.register_node("mydeck:joists_beams_"..col, {
+	description = "Deck Joists with Beam",
+	tiles = {
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:joists"},
+			},
+			{
+			items = {"mydeck:beam"},
+			},
+		}
+		},
+
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5},
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+		}
+	},
+})
+
+minetest.register_node("mydeck:joists_beam_wbrackets_"..col, {
+	description = "Deck Joists with Beam and Bracket",
+	tiles = {
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha.."^mydeck_beambf_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambf_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambs_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambs_ol.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:joists"},
+			},
+			{
+			items = {"mydeck:beam"},
+			},
+		}
+		},
+
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5},
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+
+			{-0.125,  -0.5,  0.125,  0.125, -0.1875,  0.1875}, 
+			{-0.125, -0.5, -0.1875, 0.125, -0.1875, -0.125},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+		}
+	},
+})
+minetest.register_node("mydeck:joists_side_beams_"..col, {
+	description = "Deck Joists side with Beam",
+	tiles = {
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:joists_side"},
+			},
+			{
+			items = {"mydeck:beam"},
+			},
+		}
+		},
+
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{0.375, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+		}
+	},
+})
+minetest.register_node("mydeck:joists_side_beam_wbrackets_"..col, {
+	description = "Deck Joists side with Beam and Bracket",
+	tiles = {
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha.."^mydeck_beambf_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambf_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambs_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambs_ol.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:joists_side"},
+			},
+			{
+			items = {"mydeck:beam"},
+			},
+		}
+		},
+
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{0.375, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+			{-0.125, -0.5, 0.125, 0.125, -0.1875, 0.1875}, 
+			{-0.125, -0.5, -0.1875, 0.125, -0.1875, -0.125},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+		}
+	},
+})
+
+minetest.register_node("mydeck:deck_joists_beams_"..col, {
+	description = "Deck Joists with Beam",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 3,
+		items = {
+			{
+			items = {"mydeck:deck_boards"},
+			},
+			{
+			items = {"mydeck:joists"},
+			},
+			{
+			items = {"mydeck:beam"},
+			},
+		}
+		},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5},  
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+			{-0.5, 0.375,  0.2725, 0.5, 0.5,  0.5}, 
+			{-0.5, 0.375,  0.0225, 0.5, 0.5,  0.25}, 
+			{-0.5, 0.375, -0.2275, 0.5, 0.5,  0}, 
+			{-0.5, 0.375, -0.4775, 0.5, 0.5, -0.25},  
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.5, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125},
+		}
+	},
+})
+
+minetest.register_node("mydeck:deck_joists_beam_wbrackets_"..col, {
+	description = "Deck Joists with Beam with Bracket",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha.."^mydeck_beambf_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambf_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambs_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambs_ol.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 3,
+		items = {
+			{
+			items = {"mydeck:deck_boards"},
+			},
+			{
+			items = {"mydeck:joists"},
+			},
+			{
+			items = {"mydeck:beam"},
+			},
+		}
+		},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+			{-0.5, 0.375,  0.2725, 0.5, 0.5,  0.5}, 
+			{-0.5, 0.375,  0.0225, 0.5, 0.5,  0.25}, 
+			{-0.5, 0.375, -0.2275, 0.5, 0.5,  0}, 
+			{-0.5, 0.375, -0.4775, 0.5, 0.5, -0.25},  
+			{-0.125, -0.5, 0.125, 0.125, -0.1875, 0.1875}, 
+			{-0.125, -0.5, -0.1875, 0.125, -0.1875, -0.125},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.5, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125},
+		}
+	},
+})
+
+minetest.register_node("mydeck:deck_joists_side_beams_"..col, {
+	description = "Deck Joists side with Beam",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 3,
+		items = {
+			{
+			items = {"mydeck:deck_boards"},
+			},
+			{
+			items = {"mydeck:joists_side"},
+			},
+			{
+			items = {"mydeck:beam"},
+			},
+		}
+		},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{0.375, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+			{-0.5, 0.375,  0.2725, 0.5, 0.5,  0.5}, 
+			{-0.5, 0.375,  0.0225, 0.5, 0.5,  0.25}, 
+			{-0.5, 0.375, -0.2275, 0.5, 0.5,  0}, 
+			{-0.5, 0.375, -0.4775, 0.5, 0.5, -0.25}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.5, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125},
+		}
+	},
+})
+minetest.register_node("mydeck:deck_joists_side_beam_wbrackets_"..col, {
+	description = "Deck Joists side with Beam with Bracket",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha.."^mydeck_beambf_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambf_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambs_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_beambs_ol.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 3,
+		items = {
+			{
+			items = {"mydeck:deck_boards"},
+			},
+			{
+			items = {"mydeck:joists_side"},
+			},
+			{
+			items = {"mydeck:beam"},
+			},
+		}
+		},
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{0.375, 0, -0.5, 0.5, 0.375, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125}, 
+			{-0.5, 0.375,  0.2725, 0.5, 0.5,  0.5}, 
+			{-0.5, 0.375,  0.0225, 0.5, 0.5,  0.25}, 
+			{-0.5, 0.375, -0.2275, 0.5, 0.5,  0}, 
+			{-0.5, 0.375, -0.4775, 0.5, 0.5, -0.25},  
+			{-0.125, -0.5, 0.125, 0.125, -0.1875, 0.1875}, 
+			{-0.125, -0.5, -0.1875, 0.125, -0.1875, -0.125},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.5, 0.5}, 
+			{-0.5, -0.5, -0.125, 0.5, 0, 0.125},
+		}
+	},
+})
+minetest.register_node("mydeck:joistss_"..col, {
+	description = "Deck Joists",
+	tiles = {
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:joists",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.375, 0.5}, 
+		}
+	},
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		
+		local deck = minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).name
+		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+
+
+		if node == "mydeck:beam" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:beam" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_beam", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+		if node == "mydeck:beam_wbracket" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:beam_wbracket" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+	end
+})
+
+minetest.register_node("mydeck:joists_sides_"..col, {
+	description = "Deck Joists Side",
+	tiles = {
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png^[transformR90"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:joists_side",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{0.375, 0, -0.5, 0.5, 0.375, 0.5}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.375, 0.5}, 
+		}
+	},
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		
+		local deck = minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).name
+		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+
+
+		if node == "mydeck:beam_wbracket" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:beam_wbracket" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_side_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+		if node == "mydeck:beam" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:beam" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_side_beam", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+	end
+})
+
+
+minetest.register_node("mydeck:joists_ends_"..col, {
+	description = "Deck Joists with End Plate",
+	tiles = {
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR90"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR270"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:joists_end",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, 0, 0.375, 0.5, 0.375, 0.5},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.375, 0.5},  
+		}
+	},
+})
+
+minetest.register_node("mydeck:joists_side_ends_"..col, {
+	description = "Deck Joists Side with End Plate",
+	tiles = {
+		"mydeck_hwood.png^mydeck_joistend_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR270"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR90"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:joists_side_end",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, 0, -0.5, 0.5, 0.375, -0.375}, 
+			{0.375, 0, -0.5, 0.5, 0.375, 0.5}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.375, 0.5},  
+		}
+	},
+})
+
+minetest.register_node("mydeck:joists_endrs_"..col, {
+	description = "Deck Joists Side with Wall Plate",
+	tiles = {
+		"mydeck_hwood.png^mydeck_joistend_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR270"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR90"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:joists_endr",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5},
+			{-0.5, 0, -0.5, 0.5, 0.375, -0.375},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.375, 0.5}, 
+		}
+	},
+})
+
+minetest.register_node("mydeck:joists_side_endrs_"..col, {
+	description = "Deck Joists Side with Wall Plate",
+	tiles = {
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR90"..alpha,
+		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR270"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:joists_side_endr",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, -0.375, 0.375, 0.5}, 
+			{0, 0, -0.5, 0.125, 0.375, 0.5}, 
+			{-0.5, 0, 0.5, 0.5, 0.375, 0.375}, 
+			{0.375, 0, -0.5, 0.5, 0.375, 0.5},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0, -0.5, 0.5, 0.375, 0.5}, 
+		}
+	},
+})
+minetest.register_node("mydeck:lattices_"..col, {
+	description = "Lattice",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:lattice",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, 0.4375, -0.375, 0.5,   0.5}, -- NodeBox1
+			{-0.3125, -0.5, 0.4375, -0.25, 0.5,    0.5}, -- NodeBox2
+			{-0.1875, -0.5, 0.4375, -0.125, 0.5,   0.5}, -- NodeBox3
+			{-0.0625, -0.5, 0.4375, 0, 0.5,        0.5}, -- NodeBox4
+			{0.0625, -0.5,  0.4375, 0.125, 0.5,    0.5}, -- NodeBox5
+			{0.1875, -0.5,  0.4375, 0.25, 0.5,     0.5}, -- NodeBox6
+			{0.3125, -0.5,  0.4375, 0.375, 0.5,    0.5}, -- NodeBox7
+			{0.4375, -0.5,  0.4375, 0.5, 0.5,      0.5}, -- NodeBox8
+
+			{-0.5, -0.5,    0.375, 0.5, -0.4375, 0.4375}, -- NodeBox9
+			{-0.5, -0.375,  0.375, 0.5, -0.3125, 0.4375}, -- NodeBox10
+			{-0.5, -0.25,   0.375, 0.5, -0.1875, 0.4375}, -- NodeBox11
+			{-0.5, -0.125,  0.375, 0.5, -0.0625, 0.4375},
+			{-0.5, 0,       0.375, 0.5, 0.0625,  0.4375},
+			{-0.5, 0.125,   0.375, 0.5, 0.1875,  0.4375},
+			{-0.5, 0.25,    0.375, 0.5, 0.3125,  0.4375},
+			{-0.5, 0.375,   0.375, 0.5, 0.4375,  0.4375},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, 0.5, 0.5, 0.5, 0.375},
+			}
+		},
+})
+minetest.register_node("mydeck:pile_wposts_"..col, {
+	description = "Pile",
+	tiles = {
+		"mydeck_hwood.png"..alpha.."^mydeck_piletp_ol.png^[transformR90",
+		"mydeck_concrete.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_piles_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_piles_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_pilef_ol.png",
+		"mydeck_hwood.png"..alpha.."^mydeck_pilef_ol.png",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = {
+		max_items = 2,
+		items = {
+			{
+			items = {"mydeck:pile"},
+			},
+			{
+			items = {"mydeck:post"},
+			},
+		}
+		},
+
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.375, 0.5}, 
+			{-0.4375, -0.5, -0.4375, 0.4375, -0.3125, 0.4375}, 
+			{-0.375, -0.5, -0.375, 0.375, -0.25, 0.375}, 
+			{-0.25, -0.25, -0.1875, -0.1875, 0.25, 0.1875}, 
+			{-0.1875, -0.5, -0.1875, 0.1875, -0.1875, 0.1875}, 
+			{0.1875, -0.5, -0.1875, 0.25, 0.25, 0.1875}, 
+			{-0.1875, -0.5, -0.1875, 0.1875, 0.5, 0.1875}, 
+		}
+	}
+})
+minetest.register_node("mydeck:posts_"..col, {
+	description = "Post",
+	tiles = {
+		"mydeck_hwood.png"..alpha.."^[transformR90",
+		"mydeck_hwood.png"..alpha.."^[transformR90",
+		"mydeck_hwood.png"..alpha.."^[transformR90",
+		"mydeck_hwood.png"..alpha.."^[transformR90",
+		"mydeck_hwood.png"..alpha.."^[transformR90",
+		"mydeck_hwood.png"..alpha.."^[transformR90",
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:post",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5, -0.1875, 0.1875, 0.5, 0.1875},
+		}
+	},
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		
+		local deck = minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).name
+		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+		local nodeu = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
+
+
+		if node == "mydeck:pile" then
+		   minetest.set_node(pos,{name = "air"})
+		end
+		if node == "mydeck:pile" then
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:pile_wpost", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+		
+		if nodeu == "mydeck:beam" then
+		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+		if nodeu == "mydeck:joists_beam" then
+		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:joists_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+		if nodeu == "mydeck:joists_side_beam" then
+		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:joists_side_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+		if nodeu == "mydeck:deck_joists_beam" then
+		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:deck_joists_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+		if nodeu == "mydeck:deck_joists_side_beam" then
+		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:deck_joists_side_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+		end
+	end
+})
+minetest.register_node("mydeck:rails_"..col, {
+	description = "Deck Rail Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:rail",
+	sunlight_propagates = true,
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, 0.3125, -0.4375, 0.375, 0.5}, 
+			{-0.5, 0.375, 0.25, 0.5, 0.5, 0.5},
+			{0.4375, -0.5, 0.3125, 0.5, 0.5, 0.5}, 
+			{-0.5, -0.375, 0.3125, 0.5, -0.25, 0.5}, 
+			{-0.375, -0.25, 0.375, -0.3125, 0.375, 0.4375}, 
+			{-0.25, -0.25, 0.375, -0.1875, 0.375, 0.4375}, 
+			{0.3125, -0.25, 0.375, 0.375, 0.375, 0.4375}, 
+			{0.1875, -0.25, 0.375, 0.25, 0.375, 0.4375}, 
+			{0.0625, -0.25, 0.375, 0.125, 0.375, 0.4375}, 
+			{-0.125, -0.25, 0.375, -0.0625, 0.375, 0.4375},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, 0.3125, 0.5, 0.5, 0.5},
+		}
+	}
+})
+minetest.register_node("mydeck:rail_corners_"..col, {
+	description = "Deck Rail Corner Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drop = "mydeck:rail_corner",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, 0.3125, -0.4375, 0.375, 0.5}, 
+			{-0.5, 0.375, 0.25, 0.5, 0.5, 0.5}, 
+			{0.3125, -0.5, 0.3125, 0.5, 0.5, 0.5}, 
+			{-0.5, -0.375, 0.3125, 0.5, -0.25, 0.5}, 
+			{-0.375, -0.25, 0.375, -0.3125, 0.375, 0.4375}, 
+			{-0.25, -0.25, 0.375, -0.1875, 0.375, 0.4375}, 
+			{0.1875, -0.25, 0.375, 0.25, 0.375, 0.4375}, 
+			{0.0625, -0.25, 0.375, 0.125, 0.375, 0.4375}, 
+			{-0.125, -0.25, 0.375, -0.0625, 0.375, 0.4375},
+			{0.3125, -0.5, -0.5, 0.5, 0.5, -0.4375}, 
+			{0.3125, -0.375, -0.5, 0.5, -0.25, 0.5}, 
+			{0.25, 0.375, -0.5, 0.5, 0.5, 0.5}, 
+			{0.375, -0.25, -0.375, 0.4375, 0.375, -0.3125}, 
+			{0.375, -0.25, -0.25, 0.4375, 0.375, -0.1875}, 
+			{0.375, -0.25, -0.125, 0.4375, 0.375, -0.0625}, 
+			{0.375, -0.25, 0.1875, 0.4375, 0.375, 0.25}, 
+			{0.375, -0.25, 0.0625, 0.4375, 0.375, 0.125}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, 0.3125, 0.5, 0.5, 0.5},
+			{0.3125, -0.5, -0.5, 0.5, 0.5, 0.5},
+		}
+	}
+})
+minetest.register_node("mydeck:rail_icorners_"..col, {
+	description = "Deck Rail Corner Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+		"mydeck_hwood.png^mydeck_rwood_ol.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drop = "mydeck:rail_icorner",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{0.3125, -0.5, 0.4375, 0.5, 0.375, 0.5}, 
+			{0.4375, -0.5, 0.3125, 0.5, 0.375, 0.4375}, 
+			{0.25, 0.375, 0.25, 0.5, 0.5, 0.5}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{0.3125, -0.5, 0.4375, 0.5, 0.375, 0.5}, 
+			{0.4375, -0.5, 0.3125, 0.5, 0.375, 0.4375},
+			{0.25, 0.375, 0.25, 0.5, 0.5, 0.5}, 
+		}
+	}
+})
+minetest.register_node("mydeck:stairss_"..col, {
+	description = "Stairs",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:stairs",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.25, -0.5, 0.5, -0.125, -0.125}, 
+			{-0.5, 0.0625, -0.1875, 0.5, 0.1875, 0.1875}, 
+			{-0.5, 0.375, 0.125, 0.5, 0.5, 0.5}, 
+
+			{-0.375, -0.5, -0.4375, -0.25, -0.25, -0.125}, 
+			{-0.375, -0.1875, -0.125, -0.25, 0.0625, 0.1875}, 
+			{-0.375, -0.4375, -0.125, -0.25, -0.1875, -0.0625}, 
+			{-0.375, -0.375, -0.125, -0.25, -0.25, 0}, 
+			{-0.375, -0.3125, -0.0625, -0.25, -0.1875, 0.0625}, 
+			{-0.375, -0.25, 0, -0.25, 0, 0.125}, 
+			{-0.375, 0.125, 0.1875, -0.25, 0.375, 0.5}, 
+			{-0.375, -0.125, 0.1875, -0.25, 0.1875, 0.25},
+			{-0.375, -0.0625, 0.25, -0.25, 0.25, 0.3125}, 
+			{-0.375, 0, 0.3125, -0.25, 0.375, 0.375}, 
+			{-0.375, 0.0625, 0.3125, -0.25, 0.3125, 0.4375}, 
+
+			{0.375, -0.5,    -0.4375, 0.25, -0.25,   -0.125}, 
+			{0.375, -0.1875, -0.125,  0.25,  0.0625,  0.1875}, 
+			{0.375, -0.4375, -0.125,  0.25, -0.1875, -0.0625}, 
+			{0.375, -0.375,  -0.125,  0.25, -0.25,    0}, 
+			{0.375, -0.3125, -0.0625, 0.25, -0.1875,  0.0625}, 
+			{0.375, -0.25,    0,      0.25,  0,       0.125},
+			{0.375,  0.125,   0.1875, 0.25,  0.375,   0.5},
+			{0.375, -0.125,   0.1875, 0.25,  0.1875,  0.25}, 
+			{0.375, -0.0625,  0.25,   0.25,  0.25,    0.3125},
+			{0.375,  0,       0.3125, 0.25,  0.375,   0.375},
+			{0.375,  0.0625,  0.3125, 0.25,  0.3125,  0.4375},
+
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.125, -0.1875}, 
+			{-0.5, -0.5, -0.1875, 0.5, 0.1875, 0.125}, 
+			{-0.5, -0.5, 0.125, 0.5, 0.5, 0.5}, 
+			}
+		},
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		
+		local nodedown = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+
+
+--		if nodedown == "air" then
+		   minetest.set_node(pos,{name = "mydeck:stairsbs", param2=minetest.dir_to_facedir(placer:get_look_dir())})
+--		end
+	end
+})
+minetest.register_abm({
+	nodenames = {"mydeck:stairss"},
+	interval = 1,
+	chance = 1,
+	action = function(pos, node)
+		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+
+
+		if nodeu == "air" then
+		   minetest.set_node(pos,{name = "mydeck:stairsbs", param2 = node.param2})
+		end
+	end,
+})
+minetest.register_abm({
+	nodenames = {"mydeck:stairsbs"},
+	interval = 1,
+	chance = 1,
+	action = function(pos, node)
+		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+
+
+		if nodeu ~= "air" then
+		   minetest.set_node(pos,{name = "mydeck:stairss", param2 = node.param2})
+		end
+	end,
+})
+minetest.register_node("mydeck:stairsbs_"..col, {
+	description = "Stairs",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:stairs",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.25, -0.5, 0.5, -0.125, -0.125}, 
+			{-0.5, 0.0625, -0.1875, 0.5, 0.1875, 0.1875}, 
+			{-0.5, 0.375, 0.125, 0.5, 0.5, 0.5}, 
+
+			{-0.375, -0.5, -0.4375, -0.25, -0.25, -0.125}, 
+			{-0.375, -0.1875, -0.125, -0.25, 0.0625, 0.1875}, 
+			{-0.375, -0.4375, -0.125, -0.25, -0.1875, -0.0625}, 
+			{-0.375, -0.375, -0.125, -0.25, -0.25, 0}, 
+			{-0.375, -0.3125, -0.0625, -0.25, -0.1875, 0.0625}, 
+			{-0.375, -0.25, 0, -0.25, 0, 0.125}, 
+			{-0.375, 0.125, 0.1875, -0.25, 0.375, 0.5}, 
+			{-0.375, -0.125, 0.1875, -0.25, 0.1875, 0.25},
+			{-0.375, -0.0625, 0.25, -0.25, 0.25, 0.3125}, 
+			{-0.375, 0, 0.3125, -0.25, 0.375, 0.375}, 
+			{-0.375, 0.0625, 0.3125, -0.25, 0.3125, 0.4375}, 
+
+			{0.375, -0.5,    -0.4375, 0.25, -0.25,   -0.125}, 
+			{0.375, -0.1875, -0.125,  0.25,  0.0625,  0.1875}, 
+			{0.375, -0.4375, -0.125,  0.25, -0.1875, -0.0625}, 
+			{0.375, -0.375,  -0.125,  0.25, -0.25,    0}, 
+			{0.375, -0.3125, -0.0625, 0.25, -0.1875,  0.0625}, 
+			{0.375, -0.25,    0,      0.25,  0,       0.125},
+			{0.375,  0.125,   0.1875, 0.25,  0.375,   0.5},
+			{0.375, -0.125,   0.1875, 0.25,  0.1875,  0.25}, 
+			{0.375, -0.0625,  0.25,   0.25,  0.25,    0.3125},
+			{0.375,  0,       0.3125, 0.25,  0.375,   0.375},
+			{0.375,  0.0625,  0.3125, 0.25,  0.3125,  0.4375},
+
+
+			{-0.375, -0.5625, -0.4375, -0.25, -0.5, -0.1875 },
+			{-0.375, -0.625,  -0.5, -0.25, -0.5625, -0.25   },
+			{-0.375, -0.6875, -0.5, -0.25, -0.5625, -0.3125 }, 
+			{-0.375, -0.75,   -0.5, -0.25, -0.5625, -0.375  },
+			{-0.375, -0.8125, -0.5, -0.25, -0.5625, -0.4375 }, 
+
+			{0.375, -0.5625, -0.4375, 0.25, -0.5, -0.1875 },
+			{0.375, -0.625,  -0.5, 0.25, -0.5625, -0.25   },
+			{0.375, -0.6875, -0.5, 0.25, -0.5625, -0.3125 }, 
+			{0.375, -0.75,   -0.5, 0.25, -0.5625, -0.375  },
+			{0.375, -0.8125, -0.5, 0.25, -0.5625, -0.4375 }, 
+			{-0.5, -0.625, -0.5, 0.5, -0.5, -0.4375},
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.125, -0.1875}, 
+			{-0.5, -0.5, -0.1875, 0.5, 0.1875, 0.125}, 
+			{-0.5, -0.5, 0.125, 0.5, 0.5, 0.5}, 
+			}
+		},
+})
+
+minetest.register_node("mydeck:stairs_ocorners_"..col, {
+	description = "Stairs Outside Corner",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:stairs_ocorner",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.25,   -0.5,    0.5,   -0.125, -0.125 }, 
+			{-0.5,  0.0625, -0.1875, 0.1875, 0.1875, 0.1875}, 
+			{-0.5,  0.375,   0.125, -0.125,  0.5,    0.5   }, 
+
+			{0.125,   -0.25,      -0.5,     0.5,   -0.125,  0.5}, 
+			{-0.1875,  0.0625,    -0.1875,  0.1875, 0.1875, 0.5},
+
+			{-0.375,  -0.5,       -0.4375, -0.25,  -0.25,   -0.125  }, 
+			{-0.375,  -0.1875,    -0.125,  -0.25,   0.0625,  0.1875 }, 
+			{-0.375,  -0.4375,    -0.125,  -0.25,  -0.1875, -0.0625 }, 
+			{-0.375,  -0.375,     -0.125,  -0.25,  -0.25,    0      }, 
+			{-0.375,  -0.3125,    -0.0625, -0.25,  -0.1875,  0.0625 }, 
+			{-0.375,  -0.25,       0,      -0.25,   0,       0.125  }, 
+			{-0.375,   0.125,      0.1875, -0.25,   0.375,   0.5    },
+			{-0.375,  -0.125,      0.1875, -0.25,   0.1875,  0.25   }, 
+			{-0.375,  -0.0625,     0.25,   -0.25,   0.25,    0.3125 }, 
+			{-0.375,   0,          0.3125, -0.25,   0.375,   0.375  }, 
+			{-0.375,   0.0625,     0.3125, -0.25,   0.3125,  0.4375 }, 
+
+			{ 0.4375, -0.5,        0.375, 0.125,   -0.25,    0.25 }, 
+			{ 0.125,  -0.1875,     0.375, - 0.1875,   0.0625,  0.25 }, 
+			{ 0.125,  -0.4375,     0.375, 0.0625,  -0.1875,  0.25 }, 
+			{ 0.125,  -0.375,      0.375,  0,       -0.25,    0.25 }, 
+			{ 0.0625, -0.3125,     0.375,  -0.0625,  -0.1875,  0.25 }, 
+			{ 0 ,     -0.25,       0.375,  -0.125,    0,       0.25 }, 
+			{-0.1875,  0.125,      0.375,  -0.5,      0.375,   0.25 },
+			{-0.1875, -0.125,      0.375,  -0.25,     0.1875,  0.25 }, 
+			{-0.25,   -0.0625,     0.375,  -0.3125,  0.25,    0.25 }, 
+			{-0.3125,  0,          0.375,  -0.375,   0.375,   0.25 }, 
+			{-0.3125,  0.0625,     0.375,  -0.4375,  0.3125,  0.25 }, 
+	
+			{0.1875, -0.5, -0.1875, 0.4375, -0.125, -0.4375},
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, -0.125, 0.5}, 
+			{-0.5, -0.5, -0.1875, 0.1875, 0.1875, 0.5},
+			{-0.5, -0.5, 0.125, -0.125, 0.5, 0.5},  
+			}
+		},
+})
+
+minetest.register_node("mydeck:stairs_icorners_"..col, {
+	description = "Stairs Inside Corner",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:stairs_icorner",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.25,   -0.5,    -0.125,   -0.125, -0.125 }, 
+			{-0.5,  0.0625, -0.1875, 0.1875, 0.1875, 0.1875}, 
+			{-0.5, 0.375, 0.125, 0.5, 0.5, 0.5}, 
+  
+			{-0.1875,  0.0625, -0.5, 0.1875, 0.1875, -0.1875}, 
+			{0.125, 0.375, -0.5, 0.5, 0.5, 0.5}, 
+
+			{-0.375,  -0.5,       -0.4375, -0.25,  -0.25,   -0.125  }, 
+			{-0.375,  -0.1875,    -0.125,  -0.25,   0.0625,  0.1875 }, 
+			{-0.375,  -0.4375,    -0.125,  -0.25,  -0.1875, -0.0625 }, 
+			{-0.375,  -0.375,     -0.125,  -0.25,  -0.25,    0      }, 
+			{-0.375,  -0.3125,    -0.0625, -0.25,  -0.1875,  0.0625 }, 
+			{-0.375,  -0.25,       0,      -0.25,   0,       0.125  }, 
+			{-0.375,   0.125,      0.1875, -0.25,   0.375,   0.5    },
+			{-0.375,  -0.125,      0.1875, -0.25,   0.1875,  0.25   }, 
+			{-0.375,  -0.0625,     0.25,   -0.25,   0.25,    0.3125 }, 
+			{-0.375,   0,          0.3125, -0.25,   0.375,   0.375  }, 
+			{-0.375,   0.0625,     0.3125, -0.25,   0.3125,  0.4375 }, 
+
+			{-0.4375, -0.5,        -0.375, -0.125,   -0.25,    -0.25 }, 
+			{-0.125,  -0.1875,     -0.375,  0.1875,   0.0625,  -0.25 }, 
+			{-0.125,  -0.4375,     -0.375, -0.0625,  -0.1875,  -0.25 }, 
+			{-0.125,  -0.375,      -0.375,  0,       -0.25,    -0.25 }, 
+			{-0.0625, -0.3125,     -0.375,  0.0625,  -0.1875,  -0.25 }, 
+			{ 0 ,     -0.25,       -0.375,  0.125,    0,       -0.25 }, 
+			{ 0.1875,  0.125,      -0.375,  0.5,      0.375,   -0.25 },
+			{ 0.1875, -0.125,      -0.375,  0.25,     0.1875,  -0.25 }, 
+			{ 0.25,   -0.0625,     -0.375,  0.3125,   0.25,    -0.25 }, 
+			{ 0.3125,  0,          -0.375,  0.375,    0.375,   -0.25 }, 
+			{ 0.3125,  0.0625,     -0.375,  0.4375,   0.3125,  -0.25 }, 
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5,   -0.5,    -0.1875,   -0.125, -0.1875 }, 
+			{-0.5,  -0.5, -0.1875, 0.125, 0.1875, 0.125}, 
+			{-0.5, -0.5, 0.125, 0.5, 0.5, 0.5}, 
+  
+			{-0.1875,  -0.5, -0.5, 0.125, 0.1875, 0.125}, 
+			{0.125, -0.5, -0.5, 0.5, 0.5, 0.5},
+			}
+		},
+})
+
+
+minetest.register_node("mydeck:stairs_railrs_"..col, {
+	description = "Right Stairs Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:stairs_railr",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{0.3125, -0.5, 0.4375, 0.5, 0.375, 0.5}, -- NodeBox1
+			{0.3125, -1.5, -0.4375, 0.5, -0.5, -0.5}, -- NodeBox1
+			{0.3125, 0.375, 0.4375, 0.5, 0.5, 0.5}, -- NodeBox2
+			{0.3125, 0.3125, 0.375, 0.5, 0.4375, 0.4375}, -- NodeBox3
+			{0.3125, 0.25, 0.3125, 0.5, 0.375, 0.375}, -- NodeBox4
+			{0.3125, 0.1875, 0.25, 0.5, 0.3125, 0.3125}, -- NodeBox5
+			{0.3125, 0.125, 0.1875, 0.5, 0.25, 0.25}, -- NodeBox6
+			{0.3125, 0.0625, 0.125, 0.5, 0.1875, 0.1875}, -- NodeBox7
+			{0.3125, 0, 0.0625, 0.5, 0.125, 0.125}, -- NodeBox8
+			{0.3125, -0.0625, 0, 0.5, 0.0625, 0.0625}, -- NodeBox9
+			{0.3125, -0.125, -0.0625, 0.5, 0, 0}, -- NodeBox10
+			{0.3125, -0.1875, -0.125, 0.5, -0.0625, -0.0625}, -- NodeBox11
+			{0.3125, -0.25, -0.1875, 0.5, -0.125, -0.125}, -- NodeBox12
+			{0.3125, -0.3125, -0.25, 0.5, -0.1875, -0.1875}, -- NodeBox13
+			{0.3125, -0.375, -0.3125, 0.5, -0.25, -0.25}, -- NodeBox14
+			{0.3125, -0.4375, -0.375, 0.5, -0.3125, -0.3125}, -- NodeBox15
+			{0.3125, -0.5, -0.4375, 0.5, -0.375, -0.375}, -- NodeBox16
+			{0.3125, -0.5, -0.5, 0.5, -0.4375, -0.4375}, -- NodeBox17
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{0.3125, -0.5,   -0.5,    0.5,   0.5, 0.5 }, 
+			}
+		},
+})
+minetest.register_node("mydeck:stairs_raills_"..col, {
+	description = "Left Stairs Rail Stained",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:stairs_raill",
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5, 0.4375, -0.5, 0.375, 0.5}, -- NodeBox1
+			{-0.3125, -1.5, -0.4375, -0.5, -0.5, -0.5}, -- NodeBox1
+			{-0.3125, 0.375, 0.4375, -0.5, 0.5, 0.5}, -- NodeBox2
+			{-0.3125, 0.3125, 0.375, -0.5, 0.4375, 0.4375}, -- NodeBox3
+			{-0.3125, 0.25, 0.3125, -0.5, 0.375, 0.375}, -- NodeBox4
+			{-0.3125, 0.1875, 0.25, -0.5, 0.3125, 0.3125}, -- NodeBox5
+			{-0.3125, 0.125, 0.1875, -0.5, 0.25, 0.25}, -- NodeBox6
+			{-0.3125, 0.0625, 0.125, -0.5, 0.1875, 0.1875}, -- NodeBox7
+			{-0.3125, 0, 0.0625, -0.5, 0.125, 0.125}, -- NodeBox8
+			{-0.3125, -0.0625, 0, -0.5, 0.0625, 0.0625}, -- NodeBox9
+			{-0.3125, -0.125, -0.0625, -0.5, 0, 0}, -- NodeBox10
+			{-0.3125, -0.1875, -0.125, -0.5, -0.0625, -0.0625}, -- NodeBox11
+			{-0.3125, -0.25, -0.1875, -0.5, -0.125, -0.125}, -- NodeBox12
+			{-0.3125, -0.3125, -0.25, -0.5, -0.1875, -0.1875}, -- NodeBox13
+			{-0.3125, -0.375, -0.3125, -0.5, -0.25, -0.25}, -- NodeBox14
+			{-0.3125, -0.4375, -0.375, -0.5, -0.3125, -0.3125}, -- NodeBox15
+			{-0.3125, -0.5, -0.4375, -0.5, -0.375, -0.375}, -- NodeBox16
+			{-0.3125, -0.5, -0.5, -0.5, -0.4375, -0.4375}, -- NodeBox17
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5,   -0.5,    -0.5,   0.5, 0.5 }, 
+			}
+		},
+})
+
+
+
+minetest.register_node("mydeck:stairs_railr_ends_"..col, {
+	description = "Stairs",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drop = "mydeck:stairs_railr",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{0.3125, -0.5, 0.4375, 0.5, 0.375, 0.5}, 
+			{0.3125, 0.375, 0.4375, 0.5, 0.5, 0.5}, 
+			{0.3125, 0.3125, 0.375, 0.5, 0.4375, 0.4375}, 
+			{0.3125, 0.25, 0.3125, 0.5, 0.375, 0.375}, 
+			{0.3125, 0.1875, 0.25, 0.5, 0.3125, 0.3125}, 
+			{0.3125, 0.125, 0.1875, 0.5, 0.25, 0.25}, 
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{0.3125, -0.5,   0.1875,    0.5,   0.5, 0.5 }, 
+			}
+		},
+})
+minetest.register_node("mydeck:stairs_raill_ends_"..col, {
+	description = "Stairs",
+	tiles = {
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+		"mydeck_hwood.png"..alpha,
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	drop = "mydeck:stairs_raill",
+	sunlight_propagates = true,
+	sounds = default.node_sound_wood_defaults(),
+	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5, 0.4375, -0.5, 0.375, 0.5},
+			{-0.3125, 0.375, 0.4375, -0.5, 0.5, 0.5}, 
+			{-0.3125, 0.3125, 0.375, -0.5, 0.4375, 0.4375}, 
+			{-0.3125, 0.25, 0.3125, -0.5, 0.375, 0.375}, 
+			{-0.3125, 0.1875, 0.25, -0.5, 0.3125, 0.3125}, 
+			{-0.3125, 0.125, 0.1875, -0.5, 0.25, 0.25}, 
+
+
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5,   0.1875,    -0.5,   0.5, 0.5 }, 
+			}
+		},
+})
+
+
+
+end
 
 
 

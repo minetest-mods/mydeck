@@ -162,7 +162,7 @@ minetest.register_node("mydeck:stairsb", {
 })
 
 minetest.register_node("mydeck:stairs_ocorner", {
-	description = "Stairs",
+	description = "Stairs Outside Corner",
 	tiles = {
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
@@ -227,7 +227,7 @@ minetest.register_node("mydeck:stairs_ocorner", {
 })
 
 minetest.register_node("mydeck:stairs_icorner", {
-	description = "Stairs",
+	description = "Stairs Inside Corner",
 	tiles = {
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
@@ -293,7 +293,7 @@ minetest.register_node("mydeck:stairs_icorner", {
 })
 
 minetest.register_node("mydeck:stairs_railr", {
-	description = "Stairs",
+	description = "Right Hand Rail",
 	tiles = {
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
@@ -359,7 +359,7 @@ minetest.register_node("mydeck:stairs_railr", {
 
 
 minetest.register_node("mydeck:stairs_raill", {
-	description = "Stairs",
+	description = "Left Hand Rail",
 	tiles = {
 		"mydeck_hwood.png",
 		"mydeck_hwood.png",
