@@ -28,34 +28,26 @@ minetest.register_node("mydeck:beam", {
 
 
 		if nodeu == "mydeck:post" then
-		   minetest.set_node(pos,{name = "mydeck:beam_wbracket", param2=node.param2})
+		   minetest.set_node(pos,{name = "mydeck:beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
 		end
 
 		if nodea == "mydeck:joists" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodea == "mydeck:joists" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:joists_beam", param2=node.param2})
 		end
 
 		if nodea == "mydeck:joists_side" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodea == "mydeck:joists_side" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:joists_side_beam", param2=node.param2})
 		end
 
 		if nodea == "mydeck:deck_joists" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodea == "mydeck:deck_joists" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:deck_joists_beam", param2=node.param2})
 		end
 
 		if nodea == "mydeck:deck_joists_side" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodea == "mydeck:deck_joists_side" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:deck_joists_side_beam", param2=node.param2})
 		end
 

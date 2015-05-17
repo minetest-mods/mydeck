@@ -40,77 +40,55 @@ minetest.register_node("mydeck:deck_boards", {
 
 		
 		if nodeu == "mydeck:joists" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:joists" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists", param2=node.param2})
 		end
 		if nodeu == "mydeck:joists_side" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:joists_side" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side", param2=node.param2})
 		end
 		if nodeu == "mydeck:joists_beam" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:joists_beam" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_beam", param2=node.param2})
 		end
 
 		if nodeu == "mydeck:joists_side_beam" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:joists_side_beam" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_beam", param2=node.param2})
 		end
 
 		if nodeu == "mydeck:joists_end" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:joists_end" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_end", param2=node.param2})
 		end
 
 		if nodeu == "mydeck:joists_side_end" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:joists_side_end" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_end", param2=node.param2})
 		end
 
 		if nodeu == "mydeck:joists_endr" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:joists_endr" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_endr", param2=node.param2})
 		end
 
 		if nodeu == "mydeck:joists_side_endr" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:joists_side_endr" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_endr", param2=node.param2})
 		end
 
 		if nodeu == "mydeck:joists_beam_wbracket" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:joists_beam_wbracket" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_beam_wbracket", param2=node.param2})
 		end
 
 		if nodeu == "mydeck:joists_side_beam_wbracket" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:joists_side_beam_wbracket" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_beam_wbracket", param2=node.param2})
 		end
 
 		if nodeu == "mydeck:beam" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if nodeu == "mydeck:beam" then
+		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_beam", param2=node.param2})
 		end
 	end,

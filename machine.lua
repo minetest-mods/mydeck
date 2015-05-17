@@ -1,11 +1,29 @@
 local material = {}
 local shape = {}
-local make_ok = {}
-local make_ok2 = {}
-local make_ok3 = {}
+local make_ok = 0
+local make_ok2 = 0
+local make_ok3 = 0
 local anzahl = {}
 local brushcount = {}
 local cbruchcount = {}
+
+local color_tab = {
+{"black", 	"Black",		"^[colorize:black:200"},
+{"blue", 	"Blue",			"^[colorize:#0B0B3B:150"},
+{"brown", 	"Brown",		"^[colorize:#190B07:140"},
+{"cyan", 	"Cyan",			"^[colorize:cyan:75"},
+{"dark_green", 	"Dark Green",		"^[colorize:#071907:150"},
+{"dark_grey", 	"Dark Grey",		"^[colorize:#1C1C1C:150"},
+{"green", 	"Green",		"^[colorize:green:75"},
+{"grey", 	"Grey",			"^[colorize:#848484:100"},
+{"magenta", 	"Magenta",		"^[colorize:magenta:75"},
+{"orange",	"Orange",		"^[colorize:orange:75"},
+{"pink", 	"Pink",			"^[colorize:#FE2E9A:75"},
+{"red", 	"Red",			"^[colorize:#B40404:75"},
+{"violet", 	"Violet",		"^[colorize:#08088A:100"},
+{"white", 	"White",		"^[colorize:white:100"},
+{"yellow", 	"Yellow",		"^[colorize:yellow:75"},
+}
 
 minetest.register_node("mydeck:machine", {
 	description = "Deck Machine",
@@ -53,24 +71,18 @@ minetest.register_node("mydeck:machine", {
 can_dig = function(pos,player)
 	local meta = minetest.env:get_meta(pos);
 	local inv = meta:get_inventory()
-	if not inv:is_empty("ingot") then
-		return false
-	elseif not inv:is_empty("res") then
-		return false
-	elseif not inv:is_empty("wool") then
-		return false
-	elseif not inv:is_empty("steel") then
-		return false
-	elseif not inv:is_empty("stick") then
-		return false
-	elseif not inv:is_empty("brush") then
-		return false
-	elseif not inv:is_empty("dye") then
-		return false
-	elseif not inv:is_empty("cbrush") then
-		return false
-	end
+	if  inv:is_empty("ingot") and
+	    inv:is_empty("res") and
+	    inv:is_empty("wool") and
+	    inv:is_empty("steel") and
+	    inv:is_empty("stick") and
+	    inv:is_empty("brush") and
+	    inv:is_empty("dye") and
+	    inv:is_empty("cbrush") then
 	return true
+	else
+	return false
+	end
 end,
 
 on_construct = function(pos)
@@ -88,15 +100,20 @@ on_construct = function(pos)
 		"item_image_button[3.5,1;1,1;mydeck:joists_side_end;joistsidend; ]"..
 		"item_image_button[4.5,1;1,1;mydeck:joists_endr;joistendr; ]"..
 		"item_image_button[5.5,1;1,1;mydeck:joists_side_endr;joistsidendr; ]"..
+
+		"label[7.5,0.5;Pile]"..
+		"item_image_button[7.5,1;1,1;mydeck:pile;pile; ]"..
+		"label[7.5,2;Requires]"..
+		"label[7.5,2.5;Stone]"..
+
 		"label[0.5,2;Pile Post Beam and Stairs]"..
-		"item_image_button[0.5,2.5;1,1;mydeck:pile;pile; ]"..
-		"item_image_button[1.5,2.5;1,1;mydeck:post;post; ]"..
-		"item_image_button[2.5,2.5;1,1;mydeck:beam;beam; ]"..
-		"item_image_button[3.5,2.5;1,1;mydeck:stairs;stairs; ]"..
-		"item_image_button[4.5,2.5;1,1;mydeck:stairs_ocorner;stairso; ]"..
-		"item_image_button[5.5,2.5;1,1;mydeck:stairs_icorner;stairsi; ]"..
-		"item_image_button[6.5,2.5;1,1;mydeck:stairs_raill;sraill; ]"..
-		"item_image_button[7.5,2.5;1,1;mydeck:stairs_railr;srailr; ]"..
+		"item_image_button[0.5,2.5;1,1;mydeck:post;post; ]"..
+		"item_image_button[1.5,2.5;1,1;mydeck:beam;beam; ]"..
+		"item_image_button[2.5,2.5;1,1;mydeck:stairs;stairs; ]"..
+		"item_image_button[3.5,2.5;1,1;mydeck:stairs_ocorner;stairso; ]"..
+		"item_image_button[4.5,2.5;1,1;mydeck:stairs_icorner;stairsi; ]"..
+		"item_image_button[5.5,2.5;1,1;mydeck:stairs_raill;sraill; ]"..
+		"item_image_button[6.5,2.5;1,1;mydeck:stairs_railr;srailr; ]"..
 		"label[0.5,3.5;Deck Boards and Rail]"..
 		"item_image_button[0.5,4;1,1;mydeck:deck_boards;deckb; ]"..
 		"item_image_button[1.5,4;1,1;mydeck:rail;rail; ]"..
@@ -143,7 +160,6 @@ or fields["joistsidend"]
 or fields["joistendr"]
 or fields["joistsidendr"]
 
-or fields["pile"]
 or fields["post"]
 or fields["beam"]
 or fields["stairs"]
@@ -208,15 +224,6 @@ then
 		make_ok = "0"
 		anzahl = "2"
 		shape = "mydeck:joists_side_end"
-		if inv:is_empty("ingot") then
-			return
-		end
-	end
-
-	if fields["pile"] then
-		make_ok = "0"
-		anzahl = "1"
-		shape = "mydeck:pile"
 		if inv:is_empty("ingot") then
 			return
 		end
@@ -343,11 +350,10 @@ local gwood = minetest.registered_aliases[ingotstack:get_name()]
 local allwood = minetest.registered_items[gwood]
 
 	if allwood and allwood.groups and allwood.groups["wood"] then
---		if ingotstack:get_name()=="default:wood" then
 				make_ok = "1"
 		end
 
-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 		if make_ok == "1" then
 			local give = {}
 			for i = 0, anzahl-1 do
@@ -357,24 +363,33 @@ local allwood = minetest.registered_items[gwood]
 			inv:set_stack("ingot",1,ingotstack)
 		end            	
 end --if fields
+----------------------------------------------------------------------
+	if fields["pile"] then
+		make_ok = "0"
+		anzahl = "1"
+		shape = "mydeck:pile"
+		if inv:is_empty("ingot") then
+			return
+		end
+	
+		local ingotstack = inv:get_stack("ingot", 1)
+		local resstack = inv:get_stack("res", 1)
+	if ingotstack:get_name()== "default:stone" then
+			material = "mydeck:pile"
+			make_ok = "1"
+	end
+-----------------------------------------------------------------------
+		if make_ok == "1" then
+			local give = {}
+			for i = 0, anzahl-1 do
+				give[i+1]=inv:add_item("res",shape)
+			end
+			ingotstack:take_item()
+			inv:set_stack("ingot",1,ingotstack)
+		end            	
+end --if fields
+---------------------------------------------------------------------
 
-local color_tab = {
-{"black", 	"Black",		"^[colorize:black:200"},
-{"blue", 	"Blue",			"^[colorize:#0B0B3B:150"},
-{"brown", 	"Brown",		"^[colorize:#190B07:140"},
-{"cyan", 	"Cyan",			"^[colorize:cyan:75"},
-{"dark_green", 	"Dark Green",		"^[colorize:#071907:150"},
-{"dark_grey", 	"Dark Grey",		"^[colorize:#1C1C1C:150"},
-{"green", 	"Green",		"^[colorize:green:75"},
-{"grey", 	"Grey",			"^[colorize:#848484:100"},
-{"magenta", 	"Magenta",		"^[colorize:magenta:75"},
-{"orange",	"Orange",		"^[colorize:orange:75"},
-{"pink", 	"Pink",			"^[colorize:#FE2E9A:75"},
-{"red", 	"Red",			"^[colorize:#B40404:75"},
-{"violet", 	"Violet",		"^[colorize:#08088A:100"},
-{"white", 	"White",		"^[colorize:white:100"},
-{"yellow", 	"Yellow",		"^[colorize:yellow:75"},
-}
 for i in ipairs (color_tab) do
 local col = color_tab[i][1]
 local coldesc = color_tab[i][2]
