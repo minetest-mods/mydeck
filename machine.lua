@@ -63,13 +63,13 @@ minetest.register_node("mydeck:machine", {
 
 
 	after_place_node = function(pos, placer)
-	local meta = minetest.env:get_meta(pos);
+	local meta = minetest.get_meta(pos);
 			meta:set_string("owner",  (placer:get_player_name() or ""));
 			meta:set_string("infotext",  "Deck Machine (owned by " .. (placer:get_player_name() or "") .. ")");
 		end,
 
 can_dig = function(pos,player)
-	local meta = minetest.env:get_meta(pos);
+	local meta = minetest.get_meta(pos);
 	local inv = meta:get_inventory()
 	if  inv:is_empty("ingot") and
 	    inv:is_empty("res") and
@@ -86,7 +86,7 @@ can_dig = function(pos,player)
 end,
 
 on_construct = function(pos)
-	local meta = minetest.env:get_meta(pos)
+	local meta = minetest.get_meta(pos)
 	meta:set_string("formspec", "invsize[12,10;]"..
 		"background[-0.15,-0.25;12.40,10.75;mydeck_background.png]"..
 		"label[6,4;Wood:]"..
@@ -150,7 +150,7 @@ on_construct = function(pos)
 end,
 
 on_receive_fields = function(pos, formname, fields, sender)
-	local meta = minetest.env:get_meta(pos)
+	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
 
 if fields["joists"] 
