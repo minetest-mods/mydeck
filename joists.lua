@@ -30,16 +30,20 @@ minetest.register_node("mydeck:joists", {
 	},
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		
-		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local p2 = nodeu.param2 + 1
+			if p2 >= 4 then 
+				p2 = 0
+			end
 
 
-		if nodeu == "mydeck:beam" then
+		if nodeu.name == "mydeck:beam" then
 		   minetest.remove_node(pos)
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_beam", param2=nodeu.param2})
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_beam", param2=p2})
 		end
-		if nodeu == "mydeck:beam_wbracket" then
+		if nodeu.name == "mydeck:beam_wbracket" then
 		   minetest.remove_node(pos)
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_beam_wbracket", param2=nodeu.param2})
+		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_beam_wbracket", param2=p2})
 		end
 	end
 })
@@ -76,14 +80,17 @@ minetest.register_node("mydeck:joists_side", {
 	},
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		
-		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local p2 = node.param2 + 1
+			if p2 >= 4 then 
+				p2 = 0
+			end
 
-
-		if node == "mydeck:beam_wbracket" then
+		if node.name == "mydeck:beam_wbracket" then
 		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_side_beam_wbracket", param2=node.param2})
 		end
-		if node == "mydeck:beam" then
+		if node.name == "mydeck:beam" then
 		   minetest.remove_node(pos)
 		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_side_beam", param2=node.param2})
 		end
