@@ -471,8 +471,8 @@ minetest.register_craft({
 		output = 'mydeck:machine',
 		recipe = {
 			{'', '', ''},
-			{'default:wood', 'default:tree', 'default:wood'},
-			{'default:tree', "default:wood", 'default:tree'},		
+			{'group:wood', 'group:tree', 'group:wood'},
+			{'group:tree', "group:wood", 'group:tree'},
 		}
 })
 
