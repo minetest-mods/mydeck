@@ -71,18 +71,7 @@ minetest.register_node("mydeck:machine", {
 can_dig = function(pos,player)
 	local meta = minetest.get_meta(pos);
 	local inv = meta:get_inventory()
-	if  inv:is_empty("ingot") and
-	    inv:is_empty("res") and
-	    inv:is_empty("wool") and
-	    inv:is_empty("steel") and
-	    inv:is_empty("stick") and
-	    inv:is_empty("brush") and
-	    inv:is_empty("dye") and
-	    inv:is_empty("cbrush") then
-	return true
-	else
-	return false
-	end
+	return inv:is_empty("ingot") and inv:is_empty("res")
 end,
 
 on_construct = function(pos)
@@ -126,6 +115,14 @@ on_construct = function(pos)
 	local inv = meta:get_inventory()
 	inv:set_size("ingot", 1)
 	inv:set_size("res", 1)
+end,
+
+allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+	if listname == "res" then
+		return 0
+	else
+		return stack:get_count()
+	end
 end,
 
 on_receive_fields = function(pos, formname, fields, sender)
