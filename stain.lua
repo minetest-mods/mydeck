@@ -33,6 +33,14 @@ minetest.register_craftitem("mydeck:stain_brush",{
 
 })
 
+minetest.register_craft({
+		output = 'mydeck:stain_brush',
+		recipe = {
+			{'wool:white'},
+			{'group:stick'},		
+		}
+})
+
 minetest.register_tool("mydeck:stain_brush_"..col, {
 	description = coldesc.." Stain Brush",
 	inventory_image = "mydeck_paint_brush_"..col..".png",
