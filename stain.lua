@@ -18,27 +18,55 @@ local color_tab = {
 {"white", 	"White",		"^[colorize:white:100"},
 {"yellow", 	"Yellow",		"^[colorize:yellow:75"},
 }
-for i in ipairs (color_tab) do
-local col = color_tab[i][1]
-local coldesc = color_tab[i][2]
-local alpha = color_tab[i][3]
-
-
-
 
 minetest.register_craftitem("mydeck:stain_brush",{
 	description = "Stain Brush",
 	inventory_image = "mydeck_paint_brush.png",
-	stack_max = 1,
-
 })
 
 minetest.register_craft({
-		output = 'mydeck:stain_brush',
-		recipe = {
-			{'wool:white'},
-			{'group:stick'},		
-		}
+	output = 'mydeck:stain_brush',
+	recipe = {
+		{'wool:white'},
+		{'group:stick'},
+	}
+})
+
+local stainables = {
+	"mydeck:deck_boards", "mydeck:deck_joists", "mydeck:deck_joists_side",  "mydeck:deck_joists_end",
+	"mydeck:deck_joists_side_end", "mydeck:deck_joists_endr",  "mydeck:deck_joists_side_endr", "mydeck:rail",
+	"mydeck:rail_corner", "mydeck:rail_icorner", "mydeck:beam", "mydeck:beam_wbracket", "mydeck:joists_beam",
+	"mydeck:joists_beam_wbracket", "mydeck:joists_side_beam", "mydeck:joists_side_beam_wbracket",
+	"mydeck:deck_joists_beam", "mydeck:deck_joists_beam_wbracket", "mydeck:deck_joists_side_beam",
+	"mydeck:deck_joists_side_beam_wbracket", "mydeck:joists", "mydeck:joists_side", "mydeck:joists_end",
+	"mydeck:joists_side_end", "mydeck:joists_endr", "mydeck:joists_side_endr", "mydeck:pile", "mydeck:pile_wpost",
+	"mydeck:post", "mydeck:stairs", "mydeck:stairsb", "mydeck:stairs_ocorner", "mydeck:stairs_icorner",
+	"mydeck:stairs_railr", "mydeck:stairs_raill", "mydeck:lattice", "mydeck:stairs_raill_end",
+	"mydeck:stairs_railr_end", "mydeck:deck_beam", "mydeck:deck_boardss"
+}
+
+function stain_node(pos, node, col, itemstack)
+	for i, name in ipairs(stainables) do
+		if node.name == name then
+			minetest.set_node(pos,{name = name.."s_"..col, param2 = node.param2})
+			if not minetest.setting_getbool("creative_mode") then
+				itemstack:add_wear(65535 / (USES - 1))
+			end
+			return itemstack
+		end
+	end
+end
+
+for i, entry in ipairs(color_tab) do
+local col = entry[1]
+local coldesc = entry[2]
+local alpha = entry[3]
+
+
+minetest.register_craft({
+	type = "shapeless",
+	output = 'mydeck:stain_brush_'..col,
+	recipe = {'dye:'..col, 'mydeck:stain_brush'}
 })
 
 minetest.register_tool("mydeck:stain_brush_"..col, {
@@ -46,182 +74,14 @@ minetest.register_tool("mydeck:stain_brush_"..col, {
 	inventory_image = "mydeck_paint_brush_"..col..".png",
 	groups = {not_in_creative_inventory=1},
 	on_use = function(itemstack, user, pointed_thing)
+		if pointed_thing.type ~= "node" then
+			return
+		end
+		local pos = pointed_thing.under
+		local node = minetest.get_node(pos)
 
-	if pointed_thing.type ~= "node" then
-		return
+		return stain_node(pos, node, col, itemstack)
 	end
-	local pos = pointed_thing.under
-	local node = minetest.get_node(pos)
-
-	if node.name == "mydeck:deck_boards" then
-	minetest.set_node(pos,{name = "mydeck:deck_boardss_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_joists" then
-	minetest.set_node(pos,{name = "mydeck:deck_joistss_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_joists_side" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_sides_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_joists_end" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_ends_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_joists_side_end" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_side_ends_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_joists_endr" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_endrs_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_joists_side_endr" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_side_endrs_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:rail" then
-	minetest.set_node(pos,{name = "mydeck:rails_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:rail_corner" then
-	minetest.set_node(pos,{name = "mydeck:rail_corners_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:rail_icorner" then
-	minetest.set_node(pos,{name = "mydeck:rail_icorners_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:beam" then
-	minetest.set_node(pos,{name = "mydeck:beams_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:beam_wbracket" then
-	minetest.set_node(pos,{name = "mydeck:beam_wbrackets_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:joists_beam" then
-	minetest.set_node(pos,{name = "mydeck:joists_beams_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:joists_beam_wbracket" then
-	minetest.set_node(pos,{name = "mydeck:joists_beam_wbrackets_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:joists_side_beam" then
-	minetest.set_node(pos,{name = "mydeck:joists_side_beams_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:joists_side_beam_wbracket" then
-	minetest.set_node(pos,{name = "mydeck:joists_side_beam_wbrackets_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_joists_beam" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_beams_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_joists_beam_wbracket" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_beam_wbrackets_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_joists_side_beam" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_side_beams_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_joists_side_beam_wbracket" then
-	minetest.set_node(pos,{name = "mydeck:deck_joists_side_beam_wbrackets_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:joists" then
-	minetest.set_node(pos,{name = "mydeck:joistss_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:joists_side" then
-	minetest.set_node(pos,{name = "mydeck:joists_sides_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:joists_end" then
-	minetest.set_node(pos,{name = "mydeck:joists_ends_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:joists_side_end" then
-	minetest.set_node(pos,{name = "mydeck:joists_side_ends_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:joists_endr" then
-	minetest.set_node(pos,{name = "mydeck:joists_endrs_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:joists_side_endr" then
-	minetest.set_node(pos,{name = "mydeck:joists_side_endrs_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:pile" then
-	minetest.set_node(pos,{name = "mydeck:piles_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:pile_wpost" then
-	minetest.set_node(pos,{name = "mydeck:pile_wposts_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:post" then
-	minetest.set_node(pos,{name = "mydeck:posts_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:stairs" then
-	minetest.set_node(pos,{name = "mydeck:stairss_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:stairsb" then
-	minetest.set_node(pos,{name = "mydeck:stairsbs_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:stairs_ocorner" then
-	minetest.set_node(pos,{name = "mydeck:stairs_ocorners_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:stairs_icorner" then
-	minetest.set_node(pos,{name = "mydeck:stairs_icorners_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:stairs_icorner" then
-	minetest.set_node(pos,{name = "mydeck:stairs_icorners_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:stairs_railr" then
-	minetest.set_node(pos,{name = "mydeck:stairs_railrs_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:stairs_raill" then
-	minetest.set_node(pos,{name = "mydeck:stairs_raills_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:lattice" then
-	minetest.set_node(pos,{name = "mydeck:lattices_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:stairs_raill_end" then
-	minetest.set_node(pos,{name = "mydeck:stairs_raill_ends_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:stairs_railr_end" then
-	minetest.set_node(pos,{name = "mydeck:stairs_railr_ends_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_beam" then
-	minetest.set_node(pos,{name = "mydeck:deck_beams_"..col, param2=node.param2})
-	end
-
-	if node.name == "mydeck:deck_boardss" then
-	minetest.set_node(pos,{name = "mydeck:deck_boardss_"..col, param2=node.param2})
-	end
-	if not minetest.setting_getbool("creative_mode") then
-		itemstack:add_wear(65535 / (USES - 1))
-	end
-	return itemstack
-
-end
 })
 
 minetest.register_node("mydeck:deck_boardss_"..col, {
