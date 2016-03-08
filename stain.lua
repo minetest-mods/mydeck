@@ -22,6 +22,7 @@ local color_tab = {
 minetest.register_craftitem("mydeck:stain_brush",{
 	description = "Stain Brush",
 	inventory_image = "mydeck_paint_brush.png",
+	groups = {mydeckstainbrush=1},
 })
 
 minetest.register_craft({
@@ -66,13 +67,13 @@ local alpha = entry[3]
 minetest.register_craft({
 	type = "shapeless",
 	output = 'mydeck:stain_brush_'..col,
-	recipe = {'dye:'..col, 'mydeck:stain_brush'}
+	recipe = {'dye:'..col, 'group:mydeckstainbrush'}
 })
 
 minetest.register_tool("mydeck:stain_brush_"..col, {
 	description = coldesc.." Stain Brush",
 	inventory_image = "mydeck_paint_brush_"..col..".png",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, mydeckstainbrush=1},
 	on_use = function(itemstack, user, pointed_thing)
 		if pointed_thing.type ~= "node" then
 			return
