@@ -43,12 +43,30 @@ local stainables = {
 	"mydeck:joists_side_end", "mydeck:joists_endr", "mydeck:joists_side_endr", "mydeck:pile", "mydeck:pile_wpost",
 	"mydeck:post", "mydeck:stairs", "mydeck:stairsb", "mydeck:stairs_ocorner", "mydeck:stairs_icorner",
 	"mydeck:stairs_railr", "mydeck:stairs_raill", "mydeck:lattice", "mydeck:stairs_raill_end",
-	"mydeck:stairs_railr_end", "mydeck:deck_beam", "mydeck:deck_boardss"
+	"mydeck:stairs_railr_end", "mydeck:deck_beam"
 }
 
 function stain_node(pos, node, col, itemstack)
+	local nname = node.name
+	if not (string.sub(nname, 1, 7) == "mydeck:") then
+		return
+	end
+
+	local s, e
+	s, e = string.find(nname, "_[^_]+$")
+	if s and e then
+		local ncolor = string.sub(nname, s + 1, e)
+		for i, entry in ipairs(color_tab) do
+			local color = entry[1]
+			if ncolor == color then
+				nname = string.sub(nname, 1, s - 2)
+				break
+			end
+		end
+	end
+
 	for i, name in ipairs(stainables) do
-		if node.name == name then
+		if nname == name then
 			minetest.set_node(pos,{name = name.."s_"..col, param2 = node.param2})
 			if not minetest.setting_getbool("creative_mode") then
 				itemstack:add_wear(65535 / (USES - 1))
