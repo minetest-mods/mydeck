@@ -129,83 +129,8 @@ minetest.register_node("mydeck:deck_boardss_"..col, {
 			{-0.5, -0.375,  -0.5, 0.5, -0.5,  0.5}, 
 		}
 	},
-
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		
-		local deck = minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).name
-		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-
-		
-		if node == "mydeck:joists" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:joists" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-		if node == "mydeck:joists_side" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:joists_side" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-		if node == "mydeck:joists_beam" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:joists_beam" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_beam", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-
-		if node == "mydeck:joists_side_beam" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:joists_side_beam" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_beam", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-
-		if node == "mydeck:joists_end" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:joists_end" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_end", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-
-		if node == "mydeck:joists_side_end" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:joists_side_end" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_end", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-
-		if node == "mydeck:joists_endr" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:joists_endr" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_endr", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-
-		if node == "mydeck:joists_side_endr" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:joists_side_endr" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_endr", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-
-		if node == "mydeck:joists_beam_wbracket" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:joists_beam_wbracket" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-
-		if node == "mydeck:joists_side_beam_wbracket" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:joists_side_beam_wbracket" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:deck_joists_side_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-	end,
-
 })
+
 minetest.register_node("mydeck:deck_beams_"..col, {
 	description = "Deck on Beam Stained",
 	tiles = {
@@ -221,6 +146,7 @@ minetest.register_node("mydeck:deck_beams_"..col, {
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
 	sounds = default.node_sound_wood_defaults(),
+	drop = "mydeck:deck_beam",
 	groups = {cracky = 2, choppy = 2, not_in_creative_inventory=1, flammable = 1},
 	node_box = {
 		type = "fixed",
@@ -518,8 +444,9 @@ minetest.register_node("mydeck:deck_joists_side_endrs_"..col, {
 		}
 	},
 })
+
 minetest.register_node("mydeck:beams_"..col, {
-	description = "Beam",
+	description = "Beam Stained",
 	tiles = {
 		"mydeck_hwood.png^[transformR90"..alpha,
 		"mydeck_hwood.png^[transformR90"..alpha,
@@ -541,18 +468,10 @@ minetest.register_node("mydeck:beams_"..col, {
 			{-0.125, -0.5, -0.5, 0.125, 0, 0.5}, 
 		}
 	},
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		
-		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-
-
-		if node == "mydeck:post" then
-		   minetest.set_node(pos,{name = "mydeck:beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-	end
 })
+
 minetest.register_node("mydeck:beam_wbrackets_"..col, {
-	description = "Beam with Bracket",
+	description = "Beam with Bracket Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha.."^[transformR90^mydeck_beambt_ol.png",
 		"mydeck_hwood.png"..alpha.."^[transformR90^mydeck_beambt_ol.png",
@@ -579,7 +498,7 @@ minetest.register_node("mydeck:beam_wbrackets_"..col, {
 })
 
 minetest.register_node("mydeck:joists_beams_"..col, {
-	description = "Deck Joists with Beam",
+	description = "Deck Joists with Beam Stained",
 	tiles = {
 		"mydeck_hwood.png^[transformR90"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -624,7 +543,7 @@ minetest.register_node("mydeck:joists_beams_"..col, {
 })
 
 minetest.register_node("mydeck:joists_beam_wbrackets_"..col, {
-	description = "Deck Joists with Beam and Bracket",
+	description = "Deck Joists with Beam and Bracket Stained",
 	tiles = {
 		"mydeck_hwood.png^[transformR90"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -670,8 +589,9 @@ minetest.register_node("mydeck:joists_beam_wbrackets_"..col, {
 		}
 	},
 })
+
 minetest.register_node("mydeck:joists_side_beams_"..col, {
-	description = "Deck Joists side with Beam",
+	description = "Deck Joists side with Beam Stained",
 	tiles = {
 		"mydeck_hwood.png^[transformR90"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -715,8 +635,9 @@ minetest.register_node("mydeck:joists_side_beams_"..col, {
 		}
 	},
 })
+
 minetest.register_node("mydeck:joists_side_beam_wbrackets_"..col, {
-	description = "Deck Joists side with Beam and Bracket",
+	description = "Deck Joists side with Beam and Bracket Stained",
 	tiles = {
 		"mydeck_hwood.png^[transformR90"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -764,7 +685,7 @@ minetest.register_node("mydeck:joists_side_beam_wbrackets_"..col, {
 })
 
 minetest.register_node("mydeck:deck_joists_beams_"..col, {
-	description = "Deck Joists with Beam",
+	description = "Deck Joists with Beam Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -815,7 +736,7 @@ minetest.register_node("mydeck:deck_joists_beams_"..col, {
 })
 
 minetest.register_node("mydeck:deck_joists_beam_wbrackets_"..col, {
-	description = "Deck Joists with Beam with Bracket",
+	description = "Deck Joists with Beam with Bracket Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -868,7 +789,7 @@ minetest.register_node("mydeck:deck_joists_beam_wbrackets_"..col, {
 })
 
 minetest.register_node("mydeck:deck_joists_side_beams_"..col, {
-	description = "Deck Joists side with Beam",
+	description = "Deck Joists side with Beam Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -918,8 +839,9 @@ minetest.register_node("mydeck:deck_joists_side_beams_"..col, {
 		}
 	},
 })
+
 minetest.register_node("mydeck:deck_joists_side_beam_wbrackets_"..col, {
-	description = "Deck Joists side with Beam with Bracket",
+	description = "Deck Joists side with Beam with Bracket Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -971,8 +893,9 @@ minetest.register_node("mydeck:deck_joists_side_beam_wbrackets_"..col, {
 		}
 	},
 })
+
 minetest.register_node("mydeck:joistss_"..col, {
-	description = "Deck Joists",
+	description = "Deck Joists Stained",
 	tiles = {
 		"mydeck_hwood.png^[transformR90"..alpha,
 		"mydeck_hwood.png^[transformR90"..alpha,
@@ -1001,29 +924,10 @@ minetest.register_node("mydeck:joistss_"..col, {
 			{-0.5, 0, -0.5, 0.5, 0.375, 0.5}, 
 		}
 	},
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		
-		local deck = minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).name
-		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-
-
-		if node == "mydeck:beam" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:beam" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_beam", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-		if node == "mydeck:beam_wbracket" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:beam_wbracket" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-	end
 })
 
 minetest.register_node("mydeck:joists_sides_"..col, {
-	description = "Deck Joists Side",
+	description = "Deck Joists Side Stained",
 	tiles = {
 		"mydeck_hwood.png^[transformR90"..alpha,
 		"mydeck_hwood.png^[transformR90"..alpha,
@@ -1053,30 +957,10 @@ minetest.register_node("mydeck:joists_sides_"..col, {
 			{-0.5, 0, -0.5, 0.5, 0.375, 0.5}, 
 		}
 	},
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		
-		local deck = minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).name
-		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-
-
-		if node == "mydeck:beam_wbracket" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:beam_wbracket" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_side_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-		if node == "mydeck:beam" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:beam" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:joists_side_beam", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-	end
 })
 
-
 minetest.register_node("mydeck:joists_ends_"..col, {
-	description = "Deck Joists with End Plate",
+	description = "Deck Joists with End Plate Stained",
 	tiles = {
 		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180"..alpha,
 		"mydeck_hwood.png^mydeck_joistend_ol.png"..alpha,
@@ -1109,7 +993,7 @@ minetest.register_node("mydeck:joists_ends_"..col, {
 })
 
 minetest.register_node("mydeck:joists_side_ends_"..col, {
-	description = "Deck Joists Side with End Plate",
+	description = "Deck Joists Side with End Plate Stained",
 	tiles = {
 		"mydeck_hwood.png^mydeck_joistend_ol.png"..alpha,
 		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180"..alpha,
@@ -1143,7 +1027,7 @@ minetest.register_node("mydeck:joists_side_ends_"..col, {
 })
 
 minetest.register_node("mydeck:joists_endrs_"..col, {
-	description = "Deck Joists Side with Wall Plate",
+	description = "Deck Joists Side with Wall Plate Stained",
 	tiles = {
 		"mydeck_hwood.png^mydeck_joistend_ol.png"..alpha,
 		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180"..alpha,
@@ -1176,7 +1060,7 @@ minetest.register_node("mydeck:joists_endrs_"..col, {
 })
 
 minetest.register_node("mydeck:joists_side_endrs_"..col, {
-	description = "Deck Joists Side with Wall Plate",
+	description = "Deck Joists Side with Wall Plate Stained",
 	tiles = {
 		"mydeck_hwood.png^mydeck_joistend_ol.png^[transformR180"..alpha,
 		"mydeck_hwood.png^mydeck_joistend_ol.png"..alpha,
@@ -1208,8 +1092,9 @@ minetest.register_node("mydeck:joists_side_endrs_"..col, {
 		}
 	},
 })
+
 minetest.register_node("mydeck:lattices_"..col, {
-	description = "Lattice",
+	description = "Lattice Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -1254,8 +1139,9 @@ minetest.register_node("mydeck:lattices_"..col, {
 			}
 		},
 })
+
 minetest.register_node("mydeck:pile_wposts_"..col, {
-	description = "Pile",
+	description = "Pile Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha.."^mydeck_piletp_ol.png^[transformR90",
 		"mydeck_concrete.png",
@@ -1295,8 +1181,9 @@ minetest.register_node("mydeck:pile_wposts_"..col, {
 		}
 	}
 })
+
 minetest.register_node("mydeck:posts_"..col, {
-	description = "Post",
+	description = "Post Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha.."^[transformR90",
 		"mydeck_hwood.png"..alpha.."^[transformR90",
@@ -1318,37 +1205,8 @@ minetest.register_node("mydeck:posts_"..col, {
 			{-0.1875, -0.5, -0.1875, 0.1875, 0.5, 0.1875},
 		}
 	},
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		
-		local deck = minetest.get_node({x=pos.x, y=pos.y, z=pos.z}).name
-		local node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-		local nodeu = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
-
-
-		if node == "mydeck:pile" then
-		   minetest.set_node(pos,{name = "air"})
-		end
-		if node == "mydeck:pile" then
-		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = "mydeck:pile_wpost", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-		
-		if nodeu == "mydeck:beam" then
-		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-		if nodeu == "mydeck:joists_beam" then
-		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:joists_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-		if nodeu == "mydeck:joists_side_beam" then
-		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:joists_side_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-		if nodeu == "mydeck:deck_joists_beam" then
-		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:deck_joists_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-		if nodeu == "mydeck:deck_joists_side_beam" then
-		   minetest.set_node({x=pos.x, y=pos.y+1, z=pos.z},{name = "mydeck:deck_joists_side_beam_wbracket", param2=minetest.dir_to_facedir(placer:get_look_dir())})
-		end
-	end
 })
+
 minetest.register_node("mydeck:rails_"..col, {
 	description = "Deck Rail Stained",
 	tiles = {
@@ -1388,6 +1246,7 @@ minetest.register_node("mydeck:rails_"..col, {
 		}
 	}
 })
+
 minetest.register_node("mydeck:rail_corners_"..col, {
 	description = "Deck Rail Corner Stained",
 	tiles = {
@@ -1435,6 +1294,7 @@ minetest.register_node("mydeck:rail_corners_"..col, {
 		}
 	}
 })
+
 minetest.register_node("mydeck:rail_icorners_"..col, {
 	description = "Deck Rail Corner Stained",
 	tiles = {
@@ -1469,8 +1329,9 @@ minetest.register_node("mydeck:rail_icorners_"..col, {
 		}
 	}
 })
+
 minetest.register_node("mydeck:stairss_"..col, {
-	description = "Stairs",
+	description = "Stairs Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -1516,9 +1377,6 @@ minetest.register_node("mydeck:stairss_"..col, {
 			{0.375, -0.0625,  0.25,   0.25,  0.25,    0.3125},
 			{0.375,  0,       0.3125, 0.25,  0.375,   0.375},
 			{0.375,  0.0625,  0.3125, 0.25,  0.3125,  0.4375},
-
-
-
 		}
 	},
 	selection_box = {
@@ -1529,16 +1387,8 @@ minetest.register_node("mydeck:stairss_"..col, {
 			{-0.5, -0.5, 0.125, 0.5, 0.5, 0.5}, 
 			}
 		},
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		
-		local nodedown = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-
-
---		if nodedown == "air" then
-		   minetest.set_node(pos,{name = "mydeck:stairsbs", param2=minetest.dir_to_facedir(placer:get_look_dir())})
---		end
-	end
 })
+
 minetest.register_abm({
 	nodenames = {"mydeck:stairss"},
 	interval = 1,
@@ -1546,12 +1396,12 @@ minetest.register_abm({
 	action = function(pos, node)
 		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
 
-
 		if nodeu == "air" then
 		   minetest.set_node(pos,{name = "mydeck:stairsbs", param2 = node.param2})
 		end
 	end,
 })
+
 minetest.register_abm({
 	nodenames = {"mydeck:stairsbs"},
 	interval = 1,
@@ -1559,14 +1409,14 @@ minetest.register_abm({
 	action = function(pos, node)
 		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
 
-
 		if nodeu ~= "air" then
 		   minetest.set_node(pos,{name = "mydeck:stairss", param2 = node.param2})
 		end
 	end,
 })
+
 minetest.register_node("mydeck:stairsbs_"..col, {
-	description = "Stairs",
+	description = "Stairs Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -1612,7 +1462,6 @@ minetest.register_node("mydeck:stairsbs_"..col, {
 			{0.375, -0.0625,  0.25,   0.25,  0.25,    0.3125},
 			{0.375,  0,       0.3125, 0.25,  0.375,   0.375},
 			{0.375,  0.0625,  0.3125, 0.25,  0.3125,  0.4375},
-
 
 			{-0.375, -0.5625, -0.4375, -0.25, -0.5, -0.1875 },
 			{-0.375, -0.625,  -0.5, -0.25, -0.5625, -0.25   },
@@ -1626,7 +1475,6 @@ minetest.register_node("mydeck:stairsbs_"..col, {
 			{0.375, -0.75,   -0.5, 0.25, -0.5625, -0.375  },
 			{0.375, -0.8125, -0.5, 0.25, -0.5625, -0.4375 }, 
 			{-0.5, -0.625, -0.5, 0.5, -0.5, -0.4375},
-
 		}
 	},
 	selection_box = {
@@ -1640,7 +1488,7 @@ minetest.register_node("mydeck:stairsbs_"..col, {
 })
 
 minetest.register_node("mydeck:stairs_ocorners_"..col, {
-	description = "Stairs Outside Corner",
+	description = "Stairs Outside Corner Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -1691,8 +1539,6 @@ minetest.register_node("mydeck:stairs_ocorners_"..col, {
 			{-0.3125,  0.0625,     0.375,  -0.4375,  0.3125,  0.25 }, 
 	
 			{0.1875, -0.5, -0.1875, 0.4375, -0.125, -0.4375},
-
-
 		}
 	},
 	selection_box = {
@@ -1706,7 +1552,7 @@ minetest.register_node("mydeck:stairs_ocorners_"..col, {
 })
 
 minetest.register_node("mydeck:stairs_icorners_"..col, {
-	description = "Stairs Inside Corner",
+	description = "Stairs Inside Corner Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -1755,8 +1601,6 @@ minetest.register_node("mydeck:stairs_icorners_"..col, {
 			{ 0.25,   -0.0625,     -0.375,  0.3125,   0.25,    -0.25 }, 
 			{ 0.3125,  0,          -0.375,  0.375,    0.375,   -0.25 }, 
 			{ 0.3125,  0.0625,     -0.375,  0.4375,   0.3125,  -0.25 }, 
-
-
 		}
 	},
 	selection_box = {
@@ -1771,7 +1615,6 @@ minetest.register_node("mydeck:stairs_icorners_"..col, {
 			}
 		},
 })
-
 
 minetest.register_node("mydeck:stairs_railrs_"..col, {
 	description = "Right Stairs Stained",
@@ -1811,8 +1654,6 @@ minetest.register_node("mydeck:stairs_railrs_"..col, {
 			{0.3125, -0.4375, -0.375, 0.5, -0.3125, -0.3125}, -- NodeBox15
 			{0.3125, -0.5, -0.4375, 0.5, -0.375, -0.375}, -- NodeBox16
 			{0.3125, -0.5, -0.5, 0.5, -0.4375, -0.4375}, -- NodeBox17
-
-
 		}
 	},
 	selection_box = {
@@ -1822,6 +1663,7 @@ minetest.register_node("mydeck:stairs_railrs_"..col, {
 			}
 		},
 })
+
 minetest.register_node("mydeck:stairs_raills_"..col, {
 	description = "Left Stairs Rail Stained",
 	tiles = {
@@ -1860,8 +1702,6 @@ minetest.register_node("mydeck:stairs_raills_"..col, {
 			{-0.3125, -0.4375, -0.375, -0.5, -0.3125, -0.3125}, -- NodeBox15
 			{-0.3125, -0.5, -0.4375, -0.5, -0.375, -0.375}, -- NodeBox16
 			{-0.3125, -0.5, -0.5, -0.5, -0.4375, -0.4375}, -- NodeBox17
-
-
 		}
 	},
 	selection_box = {
@@ -1872,10 +1712,8 @@ minetest.register_node("mydeck:stairs_raills_"..col, {
 		},
 })
 
-
-
 minetest.register_node("mydeck:stairs_railr_ends_"..col, {
-	description = "Stairs",
+	description = "Stairs Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -1900,8 +1738,6 @@ minetest.register_node("mydeck:stairs_railr_ends_"..col, {
 			{0.3125, 0.25, 0.3125, 0.5, 0.375, 0.375}, 
 			{0.3125, 0.1875, 0.25, 0.5, 0.3125, 0.3125}, 
 			{0.3125, 0.125, 0.1875, 0.5, 0.25, 0.25}, 
-
-
 		}
 	},
 	selection_box = {
@@ -1911,8 +1747,9 @@ minetest.register_node("mydeck:stairs_railr_ends_"..col, {
 			}
 		},
 })
+
 minetest.register_node("mydeck:stairs_raill_ends_"..col, {
-	description = "Stairs",
+	description = "Stairs Stained",
 	tiles = {
 		"mydeck_hwood.png"..alpha,
 		"mydeck_hwood.png"..alpha,
@@ -1937,8 +1774,6 @@ minetest.register_node("mydeck:stairs_raill_ends_"..col, {
 			{-0.3125, 0.25, 0.3125, -0.5, 0.375, 0.375}, 
 			{-0.3125, 0.1875, 0.25, -0.5, 0.3125, 0.3125}, 
 			{-0.3125, 0.125, 0.1875, -0.5, 0.25, 0.25}, 
-
-
 		}
 	},
 	selection_box = {
@@ -1949,13 +1784,5 @@ minetest.register_node("mydeck:stairs_raill_ends_"..col, {
 		},
 })
 
-
-
-end
-
-
-
-
-
-
+end -- for colors
 
