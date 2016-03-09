@@ -1,29 +1,3 @@
-local material = {}
-local shape = {}
-local make_ok = 0
-local make_ok2 = 0
-local make_ok3 = 0
-local anzahl = {}
-local brushcount = {}
-local cbruchcount = {}
-
-local color_tab = {
-{"black", 	"Black",		"^[colorize:black:200"},
-{"blue", 	"Blue",			"^[colorize:#0B0B3B:150"},
-{"brown", 	"Brown",		"^[colorize:#190B07:140"},
-{"cyan", 	"Cyan",			"^[colorize:cyan:75"},
-{"dark_green", 	"Dark Green",		"^[colorize:#071907:150"},
-{"dark_grey", 	"Dark Grey",		"^[colorize:#1C1C1C:150"},
-{"green", 	"Green",		"^[colorize:green:75"},
-{"grey", 	"Grey",			"^[colorize:#848484:100"},
-{"magenta", 	"Magenta",		"^[colorize:magenta:75"},
-{"orange",	"Orange",		"^[colorize:orange:75"},
-{"pink", 	"Pink",			"^[colorize:#FE2E9A:75"},
-{"red", 	"Red",			"^[colorize:#B40404:75"},
-{"violet", 	"Violet",		"^[colorize:#08088A:100"},
-{"white", 	"White",		"^[colorize:white:100"},
-{"yellow", 	"Yellow",		"^[colorize:yellow:75"},
-}
 
 minetest.register_node("mydeck:machine", {
 	description = "Deck Machine",
@@ -60,7 +34,6 @@ minetest.register_node("mydeck:machine", {
 			{1.375, -0.375, -0.5,    1.25, -0.3125, 0.5},
 		}
 	},
-
 
 	after_place_node = function(pos, placer)
 	local meta = minetest.get_meta(pos);
