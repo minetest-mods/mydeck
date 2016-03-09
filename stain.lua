@@ -59,6 +59,9 @@ function stain_node(pos, node, col, itemstack)
 		for i, entry in ipairs(color_tab) do
 			local color = entry[1]
 			if ncolor == color then
+				if color == col then
+					return
+				end
 				nname = string.sub(nname, 1, s - 2)
 				break
 			end
