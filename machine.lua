@@ -98,6 +98,10 @@ allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 	end
 end,
 
+allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+	return 0
+end,
+
 on_receive_fields = function(pos, formname, fields, sender)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
