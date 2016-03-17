@@ -1393,27 +1393,27 @@ minetest.register_node("mydeck:stairss_"..col, {
 })
 
 minetest.register_abm({
-	nodenames = {"mydeck:stairss"},
+	nodenames = {"mydeck:stairss_"..col},
 	interval = 1,
 	chance = 1,
 	action = function(pos, node)
 		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
 
 		if nodeu == "air" then
-		   minetest.set_node(pos,{name = "mydeck:stairsbs", param2 = node.param2})
+		   minetest.set_node(pos,{name = "mydeck:stairsbs_"..col, param2 = node.param2})
 		end
 	end,
 })
 
 minetest.register_abm({
-	nodenames = {"mydeck:stairsbs"},
+	nodenames = {"mydeck:stairsbs_"..col},
 	interval = 1,
 	chance = 1,
 	action = function(pos, node)
 		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
 
 		if nodeu ~= "air" then
-		   minetest.set_node(pos,{name = "mydeck:stairss", param2 = node.param2})
+		   minetest.set_node(pos,{name = "mydeck:stairss_"..col, param2 = node.param2})
 		end
 	end,
 })
