@@ -33,21 +33,6 @@ minetest.register_craft({
 	}
 })
 
-<<<<<<< HEAD
-minetest.register_craft({
-		output = 'mydeck:stain_brush',
-		recipe = {
-			{'wool:white'},
-			{'group:stick'},		
-		}
-})
-
-minetest.register_tool("mydeck:stain_brush_"..col, {
-	description = coldesc.." Stain Brush",
-	inventory_image = "mydeck_paint_brush_"..col..".png",
-	groups = {not_in_creative_inventory=1},
-	on_use = function(itemstack, user, pointed_thing)
-=======
 local stainables = {
 	"mydeck:deck_boards", "mydeck:deck_joists", "mydeck:deck_joists_side",  "mydeck:deck_joists_end",
 	"mydeck:deck_joists_side_end", "mydeck:deck_joists_endr",  "mydeck:deck_joists_side_endr", "mydeck:rail",
@@ -60,7 +45,6 @@ local stainables = {
 	"mydeck:stairs_railr", "mydeck:stairs_raill", "mydeck:lattice", "mydeck:stairs_raill_end",
 	"mydeck:stairs_railr_end", "mydeck:deck_beam"
 }
->>>>>>> 8e43125556b3e6f3fdc1582e89c0c96e09fc7fe6
 
 function stain_node(pos, node, col, itemstack)
 	local nname = node.name
