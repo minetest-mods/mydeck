@@ -184,7 +184,9 @@ on_receive_fields = function(pos, formname, fields, sender)
 	for i = 0, anzahl-1 do
 		inv:add_item("res", shape)
 	end
-	ingotstack:take_item()
+	if minetest.setting_getbool("creative_mode") ~= true then
+		ingotstack:take_item()
+	end
 	inv:set_stack("ingot" ,1, ingotstack)
 end
 })
