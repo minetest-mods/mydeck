@@ -30,6 +30,7 @@ minetest.register_craft({
 	recipe = {
 		{'wool:white'},
 		{'group:stick'},
+		{'group:stick'},
 	}
 })
 
