@@ -59,9 +59,9 @@ on_construct = function(pos)
 		"item_image_button[0.5,1;1,1;mydeck:joists;joists; ]"..
 		"item_image_button[1.5,1;1,1;mydeck:joists_side;joistside; ]"..
 		"item_image_button[2.5,1;1,1;mydeck:joists_end;joistend; ]"..
-		"item_image_button[3.5,1;1,1;mydeck:joists_side_end;joistsidend; ]"..
+		"item_image_button[3.5,1;1,1;mydeck:joists_side_endr;joistsidend; ]"..
 		"item_image_button[4.5,1;1,1;mydeck:joists_endr;joistendr; ]"..
-		"item_image_button[5.5,1;1,1;mydeck:joists_side_endr;joistsidendr; ]"..
+		"item_image_button[5.5,1;1,1;mydeck:joists_side_end;joistsidendr; ]"..
 
 		"label[7.5,0.5;Pile]"..
 		"item_image_button[7.5,1;1,1;mydeck:pile;pile; ]"..
